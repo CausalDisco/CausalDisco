@@ -57,7 +57,6 @@ def snr_sortability(X, W):
     return order_alignment(W, scores)
 
 
-
 if __name__ == "__main__":
     d = 10
     W = np.diag(np.ones(d-1), 1)
