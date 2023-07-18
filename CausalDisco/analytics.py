@@ -3,8 +3,9 @@ from sklearn.linear_model import LinearRegression
 
 
 def order_alignment(W, scores, tol=0.):
-    """ 
-    Compute a measure for the agreement of an ordering incurred by the scores with a causal ordering incurred by the (weighted) adjacency matrix W.
+    """
+    Compute a measure for the agreement of an ordering incurred by the scores
+    with a causal ordering incurred by the (weighted) adjacency matrix W.
     Args:
         X: (n x d) matrix
         W: (d x d) matrix
@@ -39,11 +40,11 @@ def order_alignment(W, scores, tol=0.):
 
 def var_sortability(X, W):
     return order_alignment(W, np.var(X, axis=0))
-    
+
 
 def r2_sortability(X, W):
     return order_alignment(W, np.diag(1 - 1/np.linalg.inv(np.corrcoef(X.T))))
-      
+
 
 def snr_sortability(X, W):
     d = X.shape[1]
@@ -52,8 +53,8 @@ def snr_sortability(X, W):
     for k in range(d):
         parents = W[:, k] != 0
         if np.sum(parents) > 0:
-            LR.fit(X[:, parents], X[:, k].ravel())
-            scores[0, k] = LR.score(X[:, parents], X[:, k].ravel())
+            LR.fit(X[:, parents], X[:, k])
+            scores[0, k] = LR.score(X[:, parents], X[:, k])
     return order_alignment(W, scores)
 
 
@@ -63,6 +64,6 @@ if __name__ == "__main__":
     X = np.random.randn(10000, d).dot(np.linalg.inv(np.eye(d) - W))
     print(f'True\n{W}')
 
-    print('var-sortability=', var_sortability(X, W))
-    print('R^2-sortability=', r2_sortability(X, W))
-    print('SNR-sortability=', snr_sortability(X, W))
+    print(f'var-sortability={var_sortability(X, W):.2f}')
+    print(f'R^2-sortability={r2_sortability(X, W):.2f}')
+    print(f'SNR-sortability={snr_sortability(X, W):.2f}')

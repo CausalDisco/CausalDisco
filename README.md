@@ -1,13 +1,13 @@
 # CausalDisco 🪩
 
-Baseline algorithms and analytics tools for Causal Discovery.
+CausalDisco contains baseline algorithms and analytics tools for Causal Discovery. The [package](https://pypi.org/project/CausalDisco/) can be installed by running `pip install CausalDisco`. Additional information can be found in the [documentation](https://causaldisco.github.io/CausalDisco.docs/).
 
 ### Baseline Algorithms
 Find the following baseline algorithms in __CausalDisco/baselines.py__
 - R²-SortnRegress
 - Var-SortnRegress
 
-### Analytics tools
+### Analytics Tools
 Find the following analytics tools in __CausalDisco/analytics.py__
 - R²-sortability
 - Var-sortability
@@ -15,6 +15,8 @@ Find the following analytics tools in __CausalDisco/analytics.py__
 
 ### Sources
 If you find our algorithms useful please consider citing
+- [Beware of the Simulated DAG!](https://proceedings.neurips.cc/paper_files/paper/2021/file/e987eff4a7c7b7e580d659feb6f60c1a-Supplemental.pdf) 
+- [Simple Sorting Criteria Help Find the Causal Order in Additive Noise Models](https://arxiv.org/abs/2303.18211).
 ```
 @article{reisach2021beware,
   title={Beware of the Simulated DAG! Causal Discovery Benchmarks May Be Easy to Game},
@@ -30,4 +32,31 @@ If you find our algorithms useful please consider citing
   journal={arXiv preprint arXiv:2303.18211},
   year={2023}
 }
+```
+
+### A Simple Example
+```python
+## sample data from a linear SCM
+import numpy as np
+from CausalDisco.baselines import var_sort_regress, r2_sort_regress
+from CausalDisco.analytics import var_sortability, r2_sortability
+
+d = 10
+W = np.diag(np.ones(d-1), 1)
+X = np.random.randn(10000, d).dot(np.linalg.inv(np.eye(d) - W))
+
+# use analytics tools
+print('var-sortability=', var_sortability(X, W))
+print('R^2-sortability=', r2_sortability(X, W))
+
+# run baselines
+X_std = (X - np.mean(X, axis=0))/np.std(X, axis=0)
+
+print('--- varSortnRegress ---')
+print(f'Recovered:\n{1.0*(var_sort_regress(X)!=0)}')
+print(f'Recovered standardized:\n{1.0*(var_sort_regress(X_std)!=0)}')
+
+print('--- r2SortnRegress ---')
+print(f'Recovered:\n{1.0*(r2_sort_regress(X)!=0)}')
+print(f'Recovered standardized:\n{1.0*(r2_sort_regress(X_std)!=0)}')
 ```

@@ -16,7 +16,7 @@ def sort_regress(X, scores):
     d = X.shape[1]
     W = np.zeros((d, d))
     ordering = np.argsort(scores)
-    
+
     # backward regression
     for k in range(1, d):
         cov = ordering[:k]
@@ -29,7 +29,7 @@ def sort_regress(X, scores):
 
 
 def var_sort_regress(X):
-    """ 
+    """
     Perform sort_regress using variances as ordering criterion.
     Args:
         X: n x d data,
@@ -40,8 +40,9 @@ def var_sort_regress(X):
 
 
 def r2_sort_regress(X):
-    """ 
-    Perform sort_regress using R^2 as ordering criterion. R^2 are computed using partial correlations obtained through matrix inversion.
+    """
+    Perform sort_regress using R^2 as ordering criterion. R^2 are computed
+    using partial correlations obtained through matrix inversion.
     Args:
         X: n x d data,
     Returns:
