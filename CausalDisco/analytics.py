@@ -13,6 +13,7 @@ def order_alignment(W, scores, tol=0.):
     Returns:
         Scalar measure of agreement between the orderings
     """
+    assert tol >= 0., 'tol must be non-negative'
     scores = scores.reshape(1, -1)
     E = W != 0
     Ek = E.copy()
