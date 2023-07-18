@@ -34,6 +34,8 @@ def order_alignment(W, scores, tol=0.):
             n_correctly_ordered_paths += 1/2*(
                 (Ek * scores / scores.T <= 1 + tol) *
                 (Ek * scores / scores.T >  1 - tol)).sum()
+        else:
+            n_correctly_ordered_paths += 1/2*(Ek * scores / scores.T == 1).sum()
         Ek = Ek.dot(E)
     # np.seterr(divide=divide_err, invalid=invalid_err)
     return n_correctly_ordered_paths / n_paths
