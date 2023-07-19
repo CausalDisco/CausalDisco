@@ -24,7 +24,7 @@ jobs:
           cache-dependency-path: pyproject.toml
 
       - name: Install build dependencies
-        run: pip install wheel build pytest
+        run: pip install wheel build
 
       - name: Build release artifacts
         run: python -m build

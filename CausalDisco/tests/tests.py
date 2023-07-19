@@ -1,4 +1,6 @@
-import pytest
+"""
+Tests to be run from the root directory by `pytest CausalDisco/tests/tests.py`
+"""
 import numpy as np
 
 
