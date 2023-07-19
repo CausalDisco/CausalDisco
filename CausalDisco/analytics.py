@@ -86,16 +86,3 @@ def snr_sortability(X, W, tol=0.):
             LR.fit(X[:, parents], X[:, k])
             scores[0, k] = LR.score(X[:, parents], X[:, k])
     return order_alignment(W, scores, tol=tol)
-
-
-if __name__ == "__main__":
-    d = 10
-    W = np.diag(np.ones(d-1), 1)
-
-    X = np.random.randn(10000, d).dot(linalg.inv(np.eye(d) - W))
-
-    print(
-        f'True\n{W}\n'
-        f'var-sortability={var_sortability(X, W):.2f}\n'
-        f'R^2-sortability={r2_sortability(X, W):.2f}\n'
-        f'SNR-sortability={snr_sortability(X, W):.2f}')

@@ -1,5 +1,4 @@
 import numpy as np
-from scipy import linalg
 from sklearn.linear_model import LinearRegression, LassoLarsIC
 from CausalDisco.analytics import r2coeff
 
@@ -12,7 +11,7 @@ def sort_regress(X, scores):
         X: (n x d) matrix
         scores: (d) vector
     Returns:
-        Causal structure matrix with coefficients
+        Candidate causal structure matrix with coefficients
     """
     LR = LinearRegression()
     LL = LassoLarsIC(criterion='bic')
@@ -31,13 +30,25 @@ def sort_regress(X, scores):
     return W
 
 
+def random_regress(X):
+    """
+    Perform sort_regress using a random order induced by a random scoring
+    criterion.
+    Args:
+        X: n x d data,
+    Returns:
+        Candidate causal structure matrix with coefficients.
+    """
+    return sort_regress(X, np.random.uniform(size=X.shape[1]))
+
+
 def var_sort_regress(X):
     """
     Perform sort_regress using variances as ordering criterion.
     Args:
         X: n x d data,
     Returns:
-        causal structure matrix with coefficients.
+        Candidate causal structure matrix with coefficients.
     """
     return sort_regress(X, np.var(X, axis=0))
 
@@ -48,23 +59,6 @@ def r2_sort_regress(X):
     Args:
         X: n x d data,
     Returns:
-        causal structure matrix with coefficients.
+        Candidate causal structure matrix with coefficients.
     """
     return sort_regress(X, r2coeff(X.T))
-
-
-if __name__ == "__main__":
-    d = 10
-    W = np.diag(np.ones(d-1), 1)
-    X = np.random.randn(10000, d).dot(linalg.inv(np.eye(d) - W))
-    X_std = (X - np.mean(X, axis=0))/np.std(X, axis=0)
-
-    print(
-        f'True\n{W}\n'
-        '--- varSortnRegress ---\n'
-        f'Recovered:\n{1.0*(var_sort_regress(X)!=0)}\n'
-        f'Recovered standardized:\n{1.0*(var_sort_regress(X_std)!=0)}\n'
-        '--- r2SortnRegress ---\n'
-        f'Recovered:\n{1.0*(r2_sort_regress(X)!=0)}\n'
-        f'Recovered standardized:\n{1.0*(r2_sort_regress(X_std)!=0)}\n'
-    )
