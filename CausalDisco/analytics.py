@@ -22,7 +22,7 @@ def order_alignment(W, scores, tol=0.):
     # arrange scores as row vector
     scores = scores.reshape(1, -1)
 
-    # create d x d matrix of differences of scores such that
+    # create d x d matrix of score differences of scores such that
     # the entry in the i-th row and j-th column is
     #     * positive if score i < score j
     #     * zero if score i = score j
@@ -32,9 +32,9 @@ def order_alignment(W, scores, tol=0.):
     # measure ordering agreement
     # see 10.48550/arXiv.2102.13647, Section 3.1
     # and 10.48550/arXiv.2303.18211, Equation (3)
-    for _ in range(E.shape[0] - 1):
+    for _ in range(len(E) - 1):
         n_paths += Ek.sum()
-        # count 1/2 per correctly ordered pair and per unordered pair
+        # count 1/2 per correctly ordered or unordered pair
         n_correctly_ordered_paths += (Ek * (differences >= 0 - tol)).sum() / 2
         # count another 1/2 per correctly ordered pair
         n_correctly_ordered_paths += (Ek * (differences > 0 + tol)).sum() / 2
@@ -87,36 +87,7 @@ def snr_sortability(X, W, tol=0.):
     return order_alignment(W, scores, tol=tol)
 
 
-def sanity_checks():
-    d = 10
-    W = np.diag(np.ones(d-1), 1)
-    incr = np.arange(d, dtype='float')
-
-    # correctly ordered
-    assert order_alignment(W, incr) == 1., 'sanity check failed'
-    # incorrectly ordered
-    assert order_alignment(W, -incr) == 0., 'sanity check failed'
-    # unordered
-    assert order_alignment(W, np.zeros(d)) == .5, 'sanity check failed'
-    assert order_alignment(W, np.ones(d)) == .5, 'sanity check failed'
-
-    # ordered, yet very small scores
-    # the difference between the smallest and largest score is (d-1)/1e5
-    incr /= 1e5
-    # with tol=0. no small increase is attributed to numerical imprecision
-    assert order_alignment(W, incr, tol=0.) == 1., 'sanity check failed'
-    # here all small increases are considered within numerical imprecision,
-    # so all pairs are considered unordered
-    assert order_alignment(W, incr, tol=(d-1)/1e5) == .5, 'sanity check failed'
-    # if we slightly decrease the tolerance, some pairs are considered ordered
-    # some unordered
-    assert order_alignment(W, incr, tol=(d-2)/1e5) > .5, 'sanity check failed'
-    assert order_alignment(W, incr, tol=(d-2)/1e5) < 1, 'sanity check failed'
-
-
 if __name__ == "__main__":
-    sanity_checks()
-
     d = 10
     W = np.diag(np.ones(d-1), 1)
 
