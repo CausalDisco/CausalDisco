@@ -40,6 +40,7 @@ A Simple Example
 
 .. code-block:: python
     
+    ## sample data from a linear SCM
     import numpy as np
     from scipy import linalg
     from CausalDisco.analytics import var_sortability, r2_sortability
@@ -50,10 +51,10 @@ A Simple Example
     X_std = (X - np.mean(X, axis=0))/np.std(X, axis=0)
 
     # run analytics and print results
-    from CausalDisco.baselines import (
-        random_sort_regress,
-        var_sort_regress,
-        r2_sort_regress
+    from CausalDisco.analytics import (
+        var_sortability,
+        r2_sortability,
+        snr_sortability
     )
 
     print(
@@ -64,10 +65,10 @@ A Simple Example
     )
 
     # run baselines and print results
-    from CausalDisco.analytics import (
-        var_sortability,
-        r2_sortability,
-        snr_sortability
+    from CausalDisco.baselines import (
+        random_sort_regress,
+        var_sort_regress,
+        r2_sort_regress
     )
 
     print(
