@@ -1,4 +1,5 @@
 [![Latest version](https://badge.fury.io/py/CausalDisco.svg)](https://badge.fury.io/py/CausalDisco)
+[![License: BSD](https://img.shields.io/badge/License-BSD-blue.svg)](https://github.com/CausalDisco/CausalDisco/blob/main/LICENSE)
 [![Downloads](https://static.pepy.tech/personalized-badge/CausalDisco?period=total&units=international_system&left_color=grey&right_color=green&left_text=Downloads)](https://pepy.tech/project/CausalDisco)
 
 
