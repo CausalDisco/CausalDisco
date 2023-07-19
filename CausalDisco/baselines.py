@@ -31,6 +31,13 @@ def sort_regress(X, scores):
     return W
 
 
+def random_regress(X, seed=None):
+    if seed is None:
+        seed = np.random.randint(0, np.iinfo('int').max)
+    rng = np.random.default_rng(seed)
+    return sort_regress(X, rng.permutation(X.shape[1]))
+
+
 def var_sort_regress(X):
     """
     Perform sort_regress using variances as ordering criterion.
@@ -60,11 +67,14 @@ if __name__ == "__main__":
     X_std = (X - np.mean(X, axis=0))/np.std(X, axis=0)
 
     print(
-        f'True\n{W}\n'
+        f'True\n{W}\n\n'
+        '--- randomSortnRegress ---\n'
+        f'Recovered:\n{1.0*(random_regress(X)!=0)}\n'
+        f'Recovered standardized:\n{1.0*(random_regress(X_std)!=0)}\n\n'
         '--- varSortnRegress ---\n'
         f'Recovered:\n{1.0*(var_sort_regress(X)!=0)}\n'
-        f'Recovered standardized:\n{1.0*(var_sort_regress(X_std)!=0)}\n'
+        f'Recovered standardized:\n{1.0*(var_sort_regress(X_std)!=0)}\n\n'
         '--- r2SortnRegress ---\n'
         f'Recovered:\n{1.0*(r2_sort_regress(X)!=0)}\n'
-        f'Recovered standardized:\n{1.0*(r2_sort_regress(X_std)!=0)}\n'
+        f'Recovered standardized:\n{1.0*(r2_sort_regress(X_std)!=0)}'
     )
