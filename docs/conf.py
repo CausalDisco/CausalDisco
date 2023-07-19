@@ -3,7 +3,7 @@ import datetime
 
 project = 'CausalDisco'
 author = 'Alexander G. Reisach, Sebastian Weichwald'
-copyright = f'2023-{datetime.date.today().year}, {author}'
+copyright = f'2021-{datetime.date.today().year}, {author}'
 version = '0.1.0'
 
 # -- General configuration ---------------------------------------------------
@@ -27,5 +27,6 @@ master_doc = 'index'
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.
+html_logo = 'logo.png'
 html_theme = 'sphinx_rtd_theme'
 html_show_sphinx = False
