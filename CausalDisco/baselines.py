@@ -3,13 +3,14 @@ from sklearn.linear_model import LinearRegression, LassoLarsIC
 
 
 def sort_regress(X, scores):
-    """ 
-    Regress each variable onto all predecessors in the ordering incurred by the criterion.
+    """
+    Regress each variable onto all predecessors in
+    the ordering implied by the scores.
     Args:
         X: (n x d) matrix
-        ordering: (n) vector 
+        scores: (d) vector
     Returns:
-        causal structure matrix with coefficients.
+        Causal structure matrix with coefficients
     """
     LR = LinearRegression()
     LL = LassoLarsIC(criterion='bic')
