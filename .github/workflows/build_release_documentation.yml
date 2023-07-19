@@ -9,6 +9,10 @@ on:
       # - main
       - dev
 
+permissions:
+  id-token: write # Required for pushing the documentation files
+  contents: read  # This is required for actions/checkout
+
 jobs:
   docs:
     runs-on: ubuntu-20.04
