@@ -49,7 +49,19 @@ def r2coeff(X):
     Args:
         X: (d x n) array
     """
-    return 1 - np.diag(1/np.linalg.inv(np.corrcoef(X)))
+    try:
+        return 1 - np.diag(1/np.linalg.inv(np.corrcoef(X)))
+    except np.linalg.LinAlgError:
+        # fallback if correlation matrix is singular
+        d = X.shape[0]
+        r2s = np.zeros(d)
+        LR = LinearRegression()
+        X = X.T
+        for k in range(d):
+            parents = np.arange(d) != k
+            LR.fit(X[:, parents], X[:, k])
+            r2s[k] = LR.score(X[:, parents], X[:, k])
+        return r2s
 
 
 def var_sortability(X, W, tol=0.):
