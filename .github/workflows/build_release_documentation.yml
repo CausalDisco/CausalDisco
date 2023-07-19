@@ -9,9 +9,9 @@ on:
       # - main
       - dev
 
-# permissions:
-#   id-token: write # Required for pushing the documentation files
-#   contents: read  # This is required for actions/checkout
+permissions:
+  contents: write # Required for pushing the documentation files
+  contents: read  # This is required for actions/checkout
 
 jobs:
   docs:
