@@ -42,7 +42,8 @@ If you find our algorithms useful please consider citing
 
 ### A Simple Example
 ```python
-## sample data from a linear SCM
+# --- sample data from a linear SCM:
+
 import numpy as np
 from scipy import linalg
 from CausalDisco.analytics import var_sortability, r2_sortability
@@ -52,7 +53,8 @@ W = np.diag(np.ones(d-1), 1)
 X = np.random.randn(10000, d).dot(linalg.inv(np.eye(d) - W))
 X_std = (X - np.mean(X, axis=0))/np.std(X, axis=0)
 
-# run analytics and print results
+# --- run analytics and print results:
+
 from CausalDisco.analytics import (
     var_sortability,
     r2_sortability,
@@ -66,7 +68,8 @@ print(
     f'SNR-sortability={snr_sortability(X, W):.2f}'
 )
 
-# run baselines and print results
+# --- run baselines and print results:
+
 from CausalDisco.baselines import (
     random_sort_regress,
     var_sort_regress,
