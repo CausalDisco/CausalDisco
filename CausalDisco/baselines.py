@@ -69,26 +69,3 @@ def r2_sort_regress(X):
         Candidate causal structure matrix with coefficients.
     """
     return sort_regress(X, r2coeff(X.T))
-<<<<<<< HEAD
-=======
-
-
-if __name__ == "__main__":
-    d = 10
-    W = np.diag(np.ones(d-1), 1)
-    X = np.random.randn(10000, d).dot(linalg.inv(np.eye(d) - W))
-    X_std = (X - np.mean(X, axis=0))/np.std(X, axis=0)
-
-    print(
-        f'True\n{W}\n\n'
-        '--- randomSortnRegress ---\n'
-        f'Recovered:\n{1.0*(random_regress(X)!=0)}\n'
-        f'Recovered standardized:\n{1.0*(random_regress(X_std)!=0)}\n\n'
-        '--- varSortnRegress ---\n'
-        f'Recovered:\n{1.0*(var_sort_regress(X)!=0)}\n'
-        f'Recovered standardized:\n{1.0*(var_sort_regress(X_std)!=0)}\n\n'
-        '--- r2SortnRegress ---\n'
-        f'Recovered:\n{1.0*(r2_sort_regress(X)!=0)}\n'
-        f'Recovered standardized:\n{1.0*(r2_sort_regress(X_std)!=0)}'
-    )
->>>>>>> b0e95d0276ce6164a752faef73c8d64ecb62545b
