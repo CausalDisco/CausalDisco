@@ -11,7 +11,6 @@ on:
 
 permissions:
   contents: write # Required for pushing the documentation files
-  contents: read  # This is required for actions/checkout
 
 jobs:
   docs:
