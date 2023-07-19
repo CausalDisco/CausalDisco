@@ -1,3 +1,7 @@
+[![Latest version](https://badge.fury.io/py/CausalDisco.svg)](https://badge.fury.io/py/CausalDisco)
+[![Downloads](https://static.pepy.tech/personalized-badge/CausalDisco?period=total&units=international_system&left_color=grey&right_color=green&left_text=Downloads)](https://pepy.tech/project/CausalDisco)
+
+
 # CausalDisco 🪩
 
 CausalDisco contains baseline algorithms and analytics tools for Causal Discovery. The [package](https://pypi.org/project/CausalDisco/) can be installed by running `pip install CausalDisco`. Additional information can be found in the [documentation](https://causaldisco.github.io/CausalDisco.docs/).
@@ -16,7 +20,7 @@ Find the following analytics tools in __CausalDisco/analytics.py__
 
 ### Sources
 If you find our algorithms useful please consider citing
-- [Beware of the Simulated DAG!](https://proceedings.neurips.cc/paper_files/paper/2021/file/e987eff4a7c7b7e580d659feb6f60c1a-Supplemental.pdf) 
+- [Beware of the Simulated DAG!](https://proceedings.neurips.cc/paper_files/paper/2021/file/e987eff4a7c7b7e580d659feb6f60c1a-Supplemental.pdf)
 - [Simple Sorting Criteria Help Find the Causal Order in Additive Noise Models](https://arxiv.org/abs/2303.18211).
 ```
 @article{reisach2021beware,
