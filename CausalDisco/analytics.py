@@ -42,6 +42,16 @@ def order_alignment(W, scores, tol=0.):
     return n_correctly_ordered_paths / n_paths
 
 
+def r2coeff(X):
+    """
+    Compute R^2's
+    using partial correlations obtained through matrix inversion.
+    Args:
+        X: (d x n) array
+    """
+    return 1 - np.diag(1/np.linalg.inv(np.corrcoef(X)))
+
+
 def var_sortability(X, W, tol=0.):
     return order_alignment(W, np.var(X, axis=0), tol=tol)
 
@@ -49,7 +59,7 @@ def var_sortability(X, W, tol=0.):
 def r2_sortability(X, W, tol=0.):
     return order_alignment(
         W,
-        np.diag(1 - 1/np.linalg.inv(np.corrcoef(X.T))),
+        r2coeff(X.T),
         tol=tol)
 
 
@@ -70,8 +80,9 @@ if __name__ == "__main__":
     W = np.diag(np.ones(d-1), 1)
 
     X = np.random.randn(10000, d).dot(np.linalg.inv(np.eye(d) - W))
-    print(f'True\n{W}')
 
-    print(f'var-sortability={var_sortability(X, W):.2f}')
-    print(f'R^2-sortability={r2_sortability(X, W):.2f}')
-    print(f'SNR-sortability={snr_sortability(X, W):.2f}')
+    print(
+        f'True\n{W}\n'
+        f'var-sortability={var_sortability(X, W):.2f}\n'
+        f'R^2-sortability={r2_sortability(X, W):.2f}\n'
+        f'SNR-sortability={snr_sortability(X, W):.2f}')
