@@ -117,7 +117,8 @@ year={2023}
 </section>
 <section id="a-simple-example">
 <h2>A Simple Example<a class="headerlink" href="#a-simple-example" title="Permalink to this heading"></a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">## sample data from a linear SCM</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- sample data from a linear SCM:</span>
+
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">linalg</span>
 <span class="kn">from</span> <span class="nn">CausalDisco.analytics</span> <span class="kn">import</span> <span class="n">var_sortability</span><span class="p">,</span> <span class="n">r2_sortability</span>
@@ -127,7 +128,8 @@ year={2023}
 <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">-</span> <span class="n">W</span><span class="p">))</span>
 <span class="n">X_std</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="c1"># run analytics and print results</span>
+<span class="c1"># --- run analytics and print results:</span>
+
 <span class="kn">from</span> <span class="nn">CausalDisco.analytics</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">var_sortability</span><span class="p">,</span>
     <span class="n">r2_sortability</span><span class="p">,</span>
@@ -141,7 +143,8 @@ year={2023}
     <span class="sa">f</span><span class="s1">&#39;SNR-sortability=</span><span class="si">{</span><span class="n">snr_sortability</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">W</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span>
 <span class="p">)</span>
 
-<span class="c1"># run baselines and print results</span>
+<span class="c1"># --- run baselines and print results:</span>
+
 <span class="kn">from</span> <span class="nn">CausalDisco.baselines</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">random_sort_regress</span><span class="p">,</span>
     <span class="n">var_sort_regress</span><span class="p">,</span>
