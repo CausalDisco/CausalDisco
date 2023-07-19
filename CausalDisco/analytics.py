@@ -19,9 +19,8 @@ def order_alignment(W, scores, tol=0.):
     n_paths = 0
     n_correctly_ordered_paths = 0
 
-    # translate scores to positive reals while keeping relative order intact
-    # and arrange as row vector
-    scores = scores.reshape(1, -1) - np.min(scores) + 1. + tol
+    # arrange scores as row vector
+    scores = scores.reshape(1, -1)
 
     # create d x d matrix of differences of scores such that
     # the entry in the i-th row and j-th column is
