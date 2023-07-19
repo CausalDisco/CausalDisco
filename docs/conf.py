@@ -28,5 +28,6 @@ master_doc = 'index'
 
 # The theme to use for HTML and HTML Help pages.
 html_logo = 'logo.png'
+html_favicon = 'logo.png'
 html_theme = 'sphinx_rtd_theme'
 html_show_sphinx = False
