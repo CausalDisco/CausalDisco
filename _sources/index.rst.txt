@@ -1,7 +1,7 @@
 CausalDisco
 ===========
 
-CausalDisco is distributed under the open source `3-clause BSD license
+`CausalDisco <https://pypi.org/project/CausalDisco/>`_ is a Python package providing baseline algorithms and analytics tools for Causal Discovery. It is distributed under the open source `3-clause BSD license
 <https://github.com/CausalDisco/CausalDisco/blob/main/LICENSE>`_.
 The source code can be found on https://github.com/CausalDisco/CausalDisco/.
 If you publish work using CausalDisco, please consider citing the publications
