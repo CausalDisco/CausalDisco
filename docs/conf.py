@@ -4,7 +4,7 @@ import datetime
 project = 'CausalDisco'
 author = 'Alexander G. Reisach, Sebastian Weichwald'
 copyright = f'2021-{datetime.date.today().year}, {author}'
-version = '0.1.0'
+version = '0.2.0'
 
 # -- General configuration ---------------------------------------------------
 

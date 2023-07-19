@@ -23,9 +23,6 @@ jobs:
           cache: pip
           cache-dependency-path: pyproject.toml
 
-      - name: Checkout
-        uses: actions/checkout@v2
-
       - name: Install build dependencies
         run: pip install wheel build pytest
 
