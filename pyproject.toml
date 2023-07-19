@@ -6,7 +6,7 @@ build-backend = "flit_core.buildapi"
 name = "CausalDisco"
 description = """Baseline algorithms and analytics tools for Causal Discovery."""
 authors = [
-    {name = "Alexander G. Reisach"}, 
+    {name = "Alexander G. Reisach"},
     {name = "Sebastian Weichwald"},
 ]
 license = {text = "BSD 3-Clause License"}
@@ -25,6 +25,7 @@ classifiers = [
 dependencies = [
   "numpy",
   "scikit-learn",
+  "scipy",
 ]
 readme = "README.md"
-version = "0.1.0"
+version = "0.2.0"
