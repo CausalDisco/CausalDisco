@@ -1,4 +1,5 @@
 import numpy as np
+from scipy import linalg
 from sklearn.linear_model import LinearRegression
 
 
@@ -50,8 +51,8 @@ def r2coeff(X):
         X: (d x n) array
     """
     try:
-        return 1 - np.diag(1/np.linalg.inv(np.corrcoef(X)))
-    except np.linalg.LinAlgError:
+        return 1 - np.diag(1/linalg.inv(np.corrcoef(X)))
+    except linalg.LinAlgError:
         # fallback if correlation matrix is singular
         d = X.shape[0]
         r2s = np.zeros(d)
@@ -91,7 +92,7 @@ if __name__ == "__main__":
     d = 10
     W = np.diag(np.ones(d-1), 1)
 
-    X = np.random.randn(10000, d).dot(np.linalg.inv(np.eye(d) - W))
+    X = np.random.randn(10000, d).dot(linalg.inv(np.eye(d) - W))
 
     print(
         f'True\n{W}\n'

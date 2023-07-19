@@ -1,4 +1,5 @@
 import numpy as np
+from scipy import linalg
 from sklearn.linear_model import LinearRegression, LassoLarsIC
 from CausalDisco.analytics import r2coeff
 
@@ -55,7 +56,7 @@ def r2_sort_regress(X):
 if __name__ == "__main__":
     d = 10
     W = np.diag(np.ones(d-1), 1)
-    X = np.random.randn(10000, d).dot(np.linalg.inv(np.eye(d) - W))
+    X = np.random.randn(10000, d).dot(linalg.inv(np.eye(d) - W))
     X_std = (X - np.mean(X, axis=0))/np.std(X, axis=0)
 
     print(
