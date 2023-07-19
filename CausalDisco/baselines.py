@@ -1,5 +1,6 @@
 import numpy as np
 from sklearn.linear_model import LinearRegression, LassoLarsIC
+from CausalDisco.analytics import r2coeff
 
 
 def sort_regress(X, scores):
@@ -42,14 +43,13 @@ def var_sort_regress(X):
 
 def r2_sort_regress(X):
     """
-    Perform sort_regress using R^2 as ordering criterion. R^2 are computed
-    using partial correlations obtained through matrix inversion.
+    Perform sort_regress using R^2 as ordering criterion.
     Args:
         X: n x d data,
     Returns:
         causal structure matrix with coefficients.
     """
-    return sort_regress(X, 1 - np.diag(1/np.linalg.inv(np.corrcoef(X.T))))
+    return sort_regress(X, r2coeff(X.T))
 
 
 if __name__ == "__main__":
