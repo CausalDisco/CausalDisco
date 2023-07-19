@@ -34,7 +34,11 @@ def test_order_alignment():
 
 def test_baselines():
     from scipy import linalg
-    from CausalDisco.baselines import random_sort_regress, var_sort_regress, r2_sort_regress
+    from CausalDisco.baselines import (
+        random_sort_regress,
+        var_sort_regress,
+        r2_sort_regress
+    )
 
     # generate data
     d = 10
@@ -59,7 +63,11 @@ def test_baselines():
 
 def test_analytics():
     from scipy import linalg
-    from CausalDisco.analytics import var_sortability, r2_sortability, snr_sortability
+    from CausalDisco.analytics import (
+        var_sortability,
+        r2_sortability,
+        snr_sortability
+    )
 
     # generate data
     d = 10
