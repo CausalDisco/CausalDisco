@@ -1,4 +1,4 @@
-name: Publish Python to PyPI
+name: Publish Python to PyPI if RELEASE
 
 on: 
   create:  # on creation of tag
