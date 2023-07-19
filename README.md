@@ -4,7 +4,7 @@
 
 # CausalDisco 🪩
 
-CausalDisco contains baseline algorithms and analytics tools for Causal Discovery. The [package](https://pypi.org/project/CausalDisco/) can be installed by running `pip install CausalDisco`. Additional information can be found in the [documentation](https://causaldisco.github.io/CausalDisco.docs/).
+CausalDisco contains baseline algorithms and analytics tools for Causal Discovery. The [package](https://pypi.org/project/CausalDisco/) can be installed by running `pip install CausalDisco`. Additional information can be found in the [documentation](https://causaldisco.github.io/CausalDisco/).
 
 ### Baseline Algorithms
 Find the following baseline algorithms in __CausalDisco/baselines.py__
