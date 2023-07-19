@@ -21,13 +21,9 @@ def order_alignment(W, scores, tol=0.):
     n_correctly_ordered_paths = 0
 
     # translate to positive reals while keeping relative order intact
-    # if np.min(scores) <= tol:
-    #     scores += tol - np.min(scores)
     scores = scores - np.min(scores) + 1. + tol
 
     # measure ordering agreement
-    # divide_err, invalid_err = np.geterr()['divide'], np.geterr()['invalid']
-    # np.seterr(divide='ignore', invalid='ignore')
     for _ in range(E.shape[0] - 1):
         n_paths += Ek.sum()
         n_correctly_ordered_paths += (Ek * scores / scores.T > 1 + tol).sum()
@@ -38,7 +34,6 @@ def order_alignment(W, scores, tol=0.):
         else:
             n_correctly_ordered_paths += 1/2*(Ek * scores / scores.T == 1).sum()
         Ek = Ek.dot(E)
-    # np.seterr(divide=divide_err, invalid=invalid_err)
     return n_correctly_ordered_paths / n_paths
 
 
