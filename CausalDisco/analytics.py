@@ -7,9 +7,9 @@ def order_alignment(W, scores, tol=0.):
     Compute a measure for the agreement of an ordering incurred by the scores
     with a causal ordering incurred by the (weighted) adjacency matrix W.
     Args:
-        X: (n x d) matrix
         W: (d x d) matrix
         scores: (d) vector
+        tol (optional): non-negative float
     Returns:
         Scalar measure of agreement between the orderings
     """
@@ -42,15 +42,18 @@ def order_alignment(W, scores, tol=0.):
     return n_correctly_ordered_paths / n_paths
 
 
-def var_sortability(X, W):
-    return order_alignment(W, np.var(X, axis=0))
+def var_sortability(X, W, tol=0.):
+    return order_alignment(W, np.var(X, axis=0), tol=tol)
 
 
-def r2_sortability(X, W):
-    return order_alignment(W, np.diag(1 - 1/np.linalg.inv(np.corrcoef(X.T))))
+def r2_sortability(X, W, tol=0.):
+    return order_alignment(
+        W,
+        np.diag(1 - 1/np.linalg.inv(np.corrcoef(X.T))),
+        tol=tol)
 
 
-def snr_sortability(X, W):
+def snr_sortability(X, W, tol=0.):
     d = X.shape[1]
     scores = np.zeros((1, d))
     LR = LinearRegression()
@@ -59,7 +62,7 @@ def snr_sortability(X, W):
         if np.sum(parents) > 0:
             LR.fit(X[:, parents], X[:, k])
             scores[0, k] = LR.score(X[:, parents], X[:, k])
-    return order_alignment(W, scores)
+    return order_alignment(W, scores, tol=tol)
 
 
 def sanity_checks():
