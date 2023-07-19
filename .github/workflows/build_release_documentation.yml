@@ -1,12 +1,13 @@
 name: Build documentation
 
 on:
-  pull_request:
-    branches:
-      - main
+  # pull_request:
+  #   branches:
+  #     - main
   push:
     branches:
-      - main
+      # - main
+      - dev
 
 jobs:
   docs:
@@ -26,8 +27,8 @@ jobs:
           cache: pip
           cache-dependency-path: pyproject.toml
 
-      - name: Clone repository
-        uses: actions/checkout@v2
+      # - name: Clone repository
+      #   uses: actions/checkout@v2
 
       - name: Install dependencies
         run: |
@@ -50,14 +51,21 @@ jobs:
             docs \
             website/docs
 
-      - name: Publish documentation
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          deploy_key: ${{ secrets.DOCUMENTATION_DEPLOY_KEY }}
-          external_repository: CausalDisco/CausalDisco.docs
-          publish_branch: main
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: dev
           publish_dir: website/docs
-          destination_dir: ./  # root dir in target repo
-          user_name: 'github-actions[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
-          commit_message: ${{ github.event.head_commit.message }}
+
+      # - name: Publish documentation
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     deploy_key: ${{ secrets.DOCUMENTATION_DEPLOY_KEY }}
+      #     external_repository: CausalDisco/CausalDisco.docs
+      #     publish_branch: main
+      #     publish_dir: website/docs
+      #     destination_dir: ./  # root dir in target repo
+      #     user_name: 'github-actions[bot]'
+      #     user_email: 'github-actions[bot]@users.noreply.github.com'
+      #     commit_message: ${{ github.event.head_commit.message }}
