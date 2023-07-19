@@ -30,19 +30,15 @@ def sort_regress(X, scores):
     return W
 
 
-def random_regress(X):
+def random_regress(X, seed=None):
     """
-    Perform sort_regress using a random order induced by a random scoring
-    criterion.
+    Perform sort_regress using a random order.
     Args:
         X: n x d data,
+        seed (optional): int
     Returns:
         Candidate causal structure matrix with coefficients.
     """
-    return sort_regress(X, np.random.uniform(size=X.shape[1]))
-
-
-def random_regress(X, seed=None):
     if seed is None:
         seed = np.random.randint(0, np.iinfo('int').max)
     rng = np.random.default_rng(seed)
