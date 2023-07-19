@@ -6,6 +6,7 @@ CausalDisco contains baseline algorithms and analytics tools for Causal Discover
 Find the following baseline algorithms in __CausalDisco/baselines.py__
 - R²-SortnRegress
 - Var-SortnRegress
+- Random-SortnRegress
 
 ### Analytics Tools
 Find the following analytics tools in __CausalDisco/analytics.py__
@@ -58,8 +59,8 @@ print(
 print(
     f'True\n{W}\n'
     '--- randomRegress ---\n'
-    f'Recovered:\n{1.0*(random_regress(X)!=0)}\n'
-    f'Recovered standardized:\n{1.0*(random_regress(X_std)!=0)}\n'
+    f'Recovered:\n{1.0*(random_sort_regress(X)!=0)}\n'
+    f'Recovered standardized:\n{1.0*(random_sort_regress(X_std)!=0)}\n'
     '--- varSortnRegress ---\n'
     f'Recovered:\n{1.0*(var_sort_regress(X)!=0)}\n'
     f'Recovered standardized:\n{1.0*(var_sort_regress(X_std)!=0)}\n'

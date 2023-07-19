@@ -30,7 +30,7 @@ def sort_regress(X, scores):
     return W
 
 
-def random_regress(X, seed=None):
+def random_sort_regress(X, seed=None):
     """
     Perform sort_regress using a random order.
     Args:

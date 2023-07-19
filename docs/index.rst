@@ -62,8 +62,8 @@ A Simple Example
     print(
         f'True\n{W}\n'
         '--- randomRegress ---\n'
-        f'Recovered:\n{1.0*(random_regress(X)!=0)}\n'
-        f'Recovered standardized:\n{1.0*(random_regress(X_std)!=0)}\n'
+        f'Recovered:\n{1.0*(random_sort_regress(X)!=0)}\n'
+        f'Recovered standardized:\n{1.0*(random_sort_regress(X_std)!=0)}\n'
         '--- varSortnRegress ---\n'
         f'Recovered:\n{1.0*(var_sort_regress(X)!=0)}\n'
         f'Recovered standardized:\n{1.0*(var_sort_regress(X_std)!=0)}\n'
