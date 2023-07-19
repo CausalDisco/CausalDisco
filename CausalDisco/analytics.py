@@ -22,7 +22,7 @@ def order_alignment(W, scores, tol=0.):
     # arrange scores as row vector
     scores = scores.reshape(1, -1)
 
-    # create d x d matrix of differences of scores such that
+    # create d x d matrix of score differences of scores such that
     # the entry in the i-th row and j-th column is
     #     * positive if score i < score j
     #     * zero if score i = score j
@@ -34,7 +34,7 @@ def order_alignment(W, scores, tol=0.):
     # and 10.48550/arXiv.2303.18211, Equation (3)
     for _ in range(len(E) - 1):
         n_paths += Ek.sum()
-        # count 1/2 per correctly ordered pair and per unordered pair
+        # count 1/2 per correctly ordered or unordered pair
         n_correctly_ordered_paths += (Ek * (differences >= 0 - tol)).sum() / 2
         # count another 1/2 per correctly ordered pair
         n_correctly_ordered_paths += (Ek * (differences > 0 + tol)).sum() / 2

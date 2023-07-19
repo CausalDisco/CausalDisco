@@ -1,6 +1,6 @@
 import pytest
 import numpy as np
-from .analytics import order_alignment
+from CausalDisco.analytics import order_alignment
 
 
 def test_order_alignment():
