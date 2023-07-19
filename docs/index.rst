@@ -44,7 +44,6 @@ A Simple Example
 
     import numpy as np
     from scipy import linalg
-    from CausalDisco.analytics import var_sortability, r2_sortability
 
     d = 10
     W = np.diag(np.ones(d-1), 1)
