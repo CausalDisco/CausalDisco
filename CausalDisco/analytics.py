@@ -99,8 +99,9 @@ if __name__ == "__main__":
     W = np.diag(np.ones(d-1), 1)
 
     X = np.random.randn(10000, d).dot(np.linalg.inv(np.eye(d) - W))
-    print(f'True\n{W}')
 
-    print(f'var-sortability={var_sortability(X, W):.2f}')
-    print(f'R^2-sortability={r2_sortability(X, W):.2f}')
-    print(f'SNR-sortability={snr_sortability(X, W):.2f}')
+    print(
+        f'True\n{W}\n'
+        f'var-sortability={var_sortability(X, W):.2f}\n'
+        f'R^2-sortability={r2_sortability(X, W):.2f}\n'
+        f'SNR-sortability={snr_sortability(X, W):.2f}')
