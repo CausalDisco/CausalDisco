@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CausalDisco &mdash; CausalDisco  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" type="text/css" />
+      <link rel="stylesheet" href="_static/katex-math.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/katex.min.js"></script>
+        <script src="_static/auto-render.min.js"></script>
+        <script src="_static/katex_autorenderer.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            CausalDisco
+              <img src="_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">CausalDisco</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#a-simple-example">A Simple Example</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">CausalDisco</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">CausalDisco</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="causaldisco">
+<h1>CausalDisco<a class="headerlink" href="#causaldisco" title="Permalink to this heading"></a></h1>
+<p>CausalDisco is distributed under the open source <a class="reference external" href="https://github.com/CausalDisco/CausalDisco/blob/main/LICENSE">3-clause BSD license</a>.
+The source code can be found on <a class="reference external" href="https://github.com/CausalDisco/CausalDisco/">https://github.com/CausalDisco/CausalDisco/</a>.
+If you publish work using CausalDisco, please consider citing the publications</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://proceedings.neurips.cc/paper_files/paper/2021/file/e987eff4a7c7b7e580d659feb6f60c1a-Supplemental.pdf">Beware of the Simulated DAG!</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/2303.18211">Simple Sorting Criteria Help Find the Causal Order in Additive Noise Models</a>.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>@article{reisach2021beware,
+title={Beware of the Simulated DAG! Causal Discovery Benchmarks May Be Easy to Game},
+author={Reisach, Alexander G. and Seiler, Christof and Weichwald, Sebastian},
+journal={Advances in Neural Information Processing Systems},
+volume={34},
+year={2021}
+}
+
+@article{reisach2023simple,
+title={Simple Sorting Criteria Help Find the Causal Order in Additive Noise Models},
+author={Reisach, Alexander G. and Tami, Myriam and Seiler, Christof and Chambaz, Antoine and Weichwald, Sebastian},
+journal={arXiv preprint arXiv:2303.18211},
+year={2023}
+}
+</pre></div>
+</div>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>CausalDisco
+</pre></div>
+</div>
+</section>
+<section id="a-simple-example">
+<h2>A Simple Example<a class="headerlink" href="#a-simple-example" title="Permalink to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">## sample data from a linear SCM</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">CausalDisco.baselines</span> <span class="kn">import</span> <span class="n">var_sort_regress</span><span class="p">,</span> <span class="n">r2_sort_regress</span>
+<span class="kn">from</span> <span class="nn">CausalDisco.analytics</span> <span class="kn">import</span> <span class="n">var_sortability</span><span class="p">,</span> <span class="n">r2_sortability</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">d</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">-</span> <span class="n">W</span><span class="p">))</span>
+<span class="n">X_std</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># run analytics and print results</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s1">&#39;True</span><span class="se">\n</span><span class="si">{</span><span class="n">W</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="sa">f</span><span class="s1">&#39;var-sortability=</span><span class="si">{</span><span class="n">var_sortability</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">W</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="sa">f</span><span class="s1">&#39;R^2-sortability=</span><span class="si">{</span><span class="n">r2_sortability</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">W</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="sa">f</span><span class="s1">&#39;SNR-sortability=</span><span class="si">{</span><span class="n">snr_sortability</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">W</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="p">)</span>
+
+<span class="c1"># run baselines and print results</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s1">&#39;True</span><span class="se">\n</span><span class="si">{</span><span class="n">W</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="s1">&#39;--- randomRegress ---</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="sa">f</span><span class="s1">&#39;Recovered:</span><span class="se">\n</span><span class="si">{</span><span class="mf">1.0</span><span class="o">*</span><span class="p">(</span><span class="n">random_sort_regress</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="sa">f</span><span class="s1">&#39;Recovered standardized:</span><span class="se">\n</span><span class="si">{</span><span class="mf">1.0</span><span class="o">*</span><span class="p">(</span><span class="n">random_sort_regress</span><span class="p">(</span><span class="n">X_std</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="s1">&#39;--- varSortnRegress ---</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="sa">f</span><span class="s1">&#39;Recovered:</span><span class="se">\n</span><span class="si">{</span><span class="mf">1.0</span><span class="o">*</span><span class="p">(</span><span class="n">var_sort_regress</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="sa">f</span><span class="s1">&#39;Recovered standardized:</span><span class="se">\n</span><span class="si">{</span><span class="mf">1.0</span><span class="o">*</span><span class="p">(</span><span class="n">var_sort_regress</span><span class="p">(</span><span class="n">X_std</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="s1">&#39;--- r2SortnRegress ---</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="sa">f</span><span class="s1">&#39;Recovered:</span><span class="se">\n</span><span class="si">{</span><span class="mf">1.0</span><span class="o">*</span><span class="p">(</span><span class="n">r2_sort_regress</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="sa">f</span><span class="s1">&#39;Recovered standardized:</span><span class="se">\n</span><span class="si">{</span><span class="mf">1.0</span><span class="o">*</span><span class="p">(</span><span class="n">r2_sort_regress</span><span class="p">(</span><span class="n">X_std</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, Alexander G. Reisach, Sebastian Weichwald.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
