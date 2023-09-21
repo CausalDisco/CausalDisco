@@ -95,7 +95,7 @@
 <span class="sd">    Args:</span>
 <span class="sd">        X: (n x d) matrix</span>
 <span class="sd">        scores: (d) vector</span>
-<span class="sd">        </span>
+
 <span class="sd">    Returns:</span>
 <span class="sd">        Candidate causal structure matrix with coefficients</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -134,11 +134,11 @@
 
 
 <div class="viewcode-block" id="var_sort_regress"><a class="viewcode-back" href="../../baselines.html#CausalDisco.baselines.var_sort_regress">[docs]</a><span class="k">def</span> <span class="nf">var_sort_regress</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Perform sort_regress using variances as ordering criterion.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        X: n x d data</span>
+<span class="sd">        X: :math:`(n \times d)` data</span>
 <span class="sd">    </span>
 <span class="sd">    Returns:</span>
 <span class="sd">        Candidate causal structure matrix with coefficients.</span>
@@ -147,11 +147,11 @@
 
 
 <div class="viewcode-block" id="r2_sort_regress"><a class="viewcode-back" href="../../baselines.html#CausalDisco.baselines.r2_sort_regress">[docs]</a><span class="k">def</span> <span class="nf">r2_sort_regress</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Perform sort_regress using :math:`R^2` as ordering criterion.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        X: n x d data,</span>
+<span class="sd">        X: :math:`(n \times d)` data,</span>
 <span class="sd">    </span>
 <span class="sd">    Returns:</span>
 <span class="sd">        Candidate causal structure matrix with coefficients.</span>
