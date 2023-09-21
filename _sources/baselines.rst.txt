@@ -1,0 +1,4 @@
+Baselines
+=========
+
+.. automodule:: CausalDisco.baselines
