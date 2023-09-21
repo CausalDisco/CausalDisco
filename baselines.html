@@ -58,7 +58,13 @@
 <li class="toctree-l1"><a class="reference internal" href="simple-example.html">A Simple Example</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="api-reference.html">API Reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="analytics.html">Analytics</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Baselines</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Baselines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#CausalDisco.baselines.r2_sort_regress"><code class="docutils literal notranslate"><span class="pre">r2_sort_regress()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#CausalDisco.baselines.random_sort_regress"><code class="docutils literal notranslate"><span class="pre">random_sort_regress()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#CausalDisco.baselines.sort_regress"><code class="docutils literal notranslate"><span class="pre">sort_regress()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#CausalDisco.baselines.var_sort_regress"><code class="docutils literal notranslate"><span class="pre">var_sort_regress()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -88,8 +94,65 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="baselines">
-<h1>Baselines<a class="headerlink" href="#baselines" title="Permalink to this heading"></a></h1>
+  <section id="module-CausalDisco.baselines">
+<span id="baselines"></span><h1>Baselines<a class="headerlink" href="#module-CausalDisco.baselines" title="Permalink to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="CausalDisco.baselines.r2_sort_regress">
+<span class="sig-prename descclassname"><span class="pre">CausalDisco.baselines.</span></span><span class="sig-name descname"><span class="pre">r2_sort_regress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CausalDisco/baselines.html#r2_sort_regress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CausalDisco.baselines.r2_sort_regress" title="Permalink to this definition"></a></dt>
+<dd><p>Perform sort_regress using R^2 as ordering criterion.
+:param X: n x d data,</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Candidate causal structure matrix with coefficients.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CausalDisco.baselines.random_sort_regress">
+<span class="sig-prename descclassname"><span class="pre">CausalDisco.baselines.</span></span><span class="sig-name descname"><span class="pre">random_sort_regress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CausalDisco/baselines.html#random_sort_regress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CausalDisco.baselines.random_sort_regress" title="Permalink to this definition"></a></dt>
+<dd><p>Perform sort_regress using a random order.
+:param X: n x d data,
+:param seed: int
+:type seed: optional</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Candidate causal structure matrix with coefficients.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CausalDisco.baselines.sort_regress">
+<span class="sig-prename descclassname"><span class="pre">CausalDisco.baselines.</span></span><span class="sig-name descname"><span class="pre">sort_regress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scores</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CausalDisco/baselines.html#sort_regress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CausalDisco.baselines.sort_regress" title="Permalink to this definition"></a></dt>
+<dd><p>Regress each variable onto all predecessors in
+the ordering implied by the scores.
+:param X: (n x d) matrix
+:param scores:</p>
+<blockquote>
+<div><ol class="loweralpha simple" start="4">
+<li><p>vector</p></li>
+</ol>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Candidate causal structure matrix with coefficients</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CausalDisco.baselines.var_sort_regress">
+<span class="sig-prename descclassname"><span class="pre">CausalDisco.baselines.</span></span><span class="sig-name descname"><span class="pre">var_sort_regress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CausalDisco/baselines.html#var_sort_regress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CausalDisco.baselines.var_sort_regress" title="Permalink to this definition"></a></dt>
+<dd><p>Perform sort_regress using variances as ordering criterion.
+:param X: n x d data,</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Candidate causal structure matrix with coefficients.</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
 
