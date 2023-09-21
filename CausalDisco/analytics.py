@@ -10,7 +10,7 @@ def order_alignment(W, scores, tol=0.):
 
     Args:
         W: :math:`(d \times d)` matrix
-        scores: (d) vector
+        scores: Vector of scores
         tol (optional): non-negative float
 
     Returns:
@@ -79,7 +79,7 @@ def var_sortability(X, W, tol=0.):
         W: Ground-truth :math:`(d \times d)` DAG adjacency matrix
     
     Returns:
-        Var-sortability value (:math:`in [0, 1]`) of the data
+        Var-sortability value (:math:`\in [0, 1]`) of the data
     """
     return order_alignment(W, np.var(X, axis=0), tol=tol)
 
@@ -93,7 +93,7 @@ def r2_sortability(X, W, tol=0.):
         W: Ground-truth :math:`(d \times d)` DAG adjacency matrix
     
     Returns:
-        :math:`R^2`-sortability value (:math:`in [0, 1]`) of the data
+        :math:`R^2`-sortability value (:math:`\in [0, 1]`) of the data
     """
     return order_alignment(
         W,
@@ -110,7 +110,7 @@ def snr_sortability(X, W, tol=0.):
         W: Ground-truth :math:`(d \times d)` DAG adjacency matrix
 
     Returns:
-        :math: SnR-sortability value (:math:`in [0, 1]`) of the data
+        :math: SnR-sortability value (:math:`\in [0, 1]`) of the data
     """
     d = X.shape[1]
     scores = np.zeros((1, d))
