@@ -4,12 +4,12 @@ from sklearn.linear_model import LinearRegression
 
 
 def order_alignment(W, scores, tol=0.):
-    """
+    r"""
     Compute a measure for the agreement of an ordering incurred by the scores
     with a causal ordering incurred by the (weighted) adjacency matrix W.
 
     Args:
-        W: :math:`(d x d)` matrix
+        W: :math:`(d \times d)` matrix
         scores: (d) vector
         tol (optional): non-negative float
 
@@ -46,11 +46,11 @@ def order_alignment(W, scores, tol=0.):
 
 
 def r2coeff(X):
-    """
+    r"""
     Compute the :math:`R^2` of each variable using partial correlations obtained through matrix inversion.
 
     Args:
-        X: (d x n) array
+        X: :math:`(d \times n)` array
 
     Returns: 
         Array of :math:`R^2` values for all variables
@@ -72,7 +72,7 @@ def r2coeff(X):
 
 def var_sortability(X, W, tol=0.):
     r"""
-    Sortability by variance. $x = 3$.
+    Sortability by variance.
     
     Args:
         X: Data :math:`(n \times d)`
@@ -85,7 +85,7 @@ def var_sortability(X, W, tol=0.):
 
 
 def r2_sortability(X, W, tol=0.):
-    """
+    r"""
     Sortability by :math:`R^2`.
     
     Args:
@@ -102,7 +102,7 @@ def r2_sortability(X, W, tol=0.):
 
 
 def snr_sortability(X, W, tol=0.):
-    """
+    r"""
     Sortability by signal-to-noise (SnR) ratio.
 
     Args:
