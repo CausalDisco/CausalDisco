@@ -7,10 +7,12 @@ def order_alignment(W, scores, tol=0.):
     """
     Compute a measure for the agreement of an ordering incurred by the scores
     with a causal ordering incurred by the (weighted) adjacency matrix W.
+
     Args:
-        W: (d x d) matrix
+        W: :math:`(d x d)` matrix
         scores: (d) vector
         tol (optional): non-negative float
+
     Returns:
         Scalar measure of agreement between the orderings
     """
@@ -45,10 +47,13 @@ def order_alignment(W, scores, tol=0.):
 
 def r2coeff(X):
     """
-    Compute R^2's
-    using partial correlations obtained through matrix inversion.
+    Compute the :math:`R^2` of each variable using partial correlations obtained through matrix inversion.
+
     Args:
         X: (d x n) array
+
+    Returns: 
+        Array of :math:`R^2` values for all variables
     """
     try:
         return 1 - np.diag(1/linalg.inv(np.corrcoef(X)))
@@ -66,10 +71,30 @@ def r2coeff(X):
 
 
 def var_sortability(X, W, tol=0.):
+    """
+    Sortability by variance.
+    
+    Args:
+        X: Data :math:`(n \times d)`
+        W: Ground-truth :math:`(d \times d)` DAG adjacency matrix
+    
+    Returns:
+        Var-sortability value (:math:`in [0, 1]`) of the data
+    """
     return order_alignment(W, np.var(X, axis=0), tol=tol)
 
 
 def r2_sortability(X, W, tol=0.):
+    """
+    Sortability by :math:`R^2`.
+    
+    Args:
+        X: Data :math:`(n \times d)`
+        W: Ground-truth :math:`(d \times d)` DAG adjacency matrix
+    
+    Returns:
+        :math:`R^2`-sortability value (:math:`in [0, 1]`) of the data
+    """
     return order_alignment(
         W,
         r2coeff(X.T),
@@ -77,6 +102,16 @@ def r2_sortability(X, W, tol=0.):
 
 
 def snr_sortability(X, W, tol=0.):
+    """
+    Sortability by signal-to-noise (SnR) ratio.
+
+    Args:
+        X: Data :math:`(n \times d)`
+        W: Ground-truth :math:`(d \times d)` DAG adjacency matrix
+
+    Returns:
+        :math: SnR-sortability value (:math:`in [0, 1]`) of the data
+    """
     d = X.shape[1]
     scores = np.zeros((1, d))
     LR = LinearRegression()

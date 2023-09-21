@@ -7,9 +7,11 @@ def sort_regress(X, scores):
     """
     Regress each variable onto all predecessors in
     the ordering implied by the scores.
+
     Args:
         X: (n x d) matrix
         scores: (d) vector
+        
     Returns:
         Candidate causal structure matrix with coefficients
     """
@@ -33,9 +35,11 @@ def sort_regress(X, scores):
 def random_sort_regress(X, seed=None):
     """
     Perform sort_regress using a random order.
+
     Args:
         X: n x d data,
         seed (optional): int
+    
     Returns:
         Candidate causal structure matrix with coefficients.
     """
@@ -48,8 +52,10 @@ def random_sort_regress(X, seed=None):
 def var_sort_regress(X):
     """
     Perform sort_regress using variances as ordering criterion.
+
     Args:
-        X: n x d data,
+        X: n x d data
+    
     Returns:
         Candidate causal structure matrix with coefficients.
     """
@@ -58,9 +64,11 @@ def var_sort_regress(X):
 
 def r2_sort_regress(X):
     """
-    Perform sort_regress using R^2 as ordering criterion.
+    Perform sort_regress using :math:`R^2` as ordering criterion.
+
     Args:
         X: n x d data,
+    
     Returns:
         Candidate causal structure matrix with coefficients.
     """
