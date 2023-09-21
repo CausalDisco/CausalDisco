@@ -1,0 +1,4 @@
+Analytics
+=========
+
+.. automodule:: CausalDisco.analytics
