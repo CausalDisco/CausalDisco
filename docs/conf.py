@@ -1,5 +1,6 @@
 # -- Project information -----------------------------------------------------
 import datetime
+import CausalDisco  # needed for `.. automodule:: in the .rst`
 
 project = 'CausalDisco'
 author = 'Alexander G. Reisach, Sebastian Weichwald'
