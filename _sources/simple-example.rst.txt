@@ -1,4 +1,4 @@
-A Simple Example
+Simple Example
 ----------------
 
 Install package:
