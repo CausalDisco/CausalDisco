@@ -71,8 +71,8 @@ def r2coeff(X):
 
 
 def var_sortability(X, W, tol=0.):
-    """
-    Sortability by variance.
+    r"""
+    Sortability by variance. $x = 3$.
     
     Args:
         X: Data :math:`(n \times d)`
