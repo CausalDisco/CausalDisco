@@ -91,10 +91,12 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute a measure for the agreement of an ordering incurred by the scores</span>
 <span class="sd">    with a causal ordering incurred by the (weighted) adjacency matrix W.</span>
+
 <span class="sd">    Args:</span>
-<span class="sd">        W: (d x d) matrix</span>
+<span class="sd">        W: :math:`(d x d)` matrix</span>
 <span class="sd">        scores: (d) vector</span>
 <span class="sd">        tol (optional): non-negative float</span>
+
 <span class="sd">    Returns:</span>
 <span class="sd">        Scalar measure of agreement between the orderings</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -129,10 +131,13 @@
 
 <div class="viewcode-block" id="r2coeff"><a class="viewcode-back" href="../../analytics.html#CausalDisco.analytics.r2coeff">[docs]</a><span class="k">def</span> <span class="nf">r2coeff</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Compute R^2&#39;s</span>
-<span class="sd">    using partial correlations obtained through matrix inversion.</span>
+<span class="sd">    Compute the :math:`R^2` of each variable using partial correlations obtained through matrix inversion.</span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        X: (d x n) array</span>
+
+<span class="sd">    Returns: </span>
+<span class="sd">        Array of :math:`R^2` values for all variables</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">X</span><span class="p">)))</span>
@@ -149,18 +154,48 @@
         <span class="k">return</span> <span class="n">r2s</span></div>
 
 
-<span class="k">def</span> <span class="nf">var_sortability</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">order_alignment</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">tol</span><span class="o">=</span><span class="n">tol</span><span class="p">)</span>
+<div class="viewcode-block" id="var_sortability"><a class="viewcode-back" href="../../analytics.html#CausalDisco.analytics.var_sortability">[docs]</a><span class="k">def</span> <span class="nf">var_sortability</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sortability by variance.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        X: Data :math:`(n \times d)`</span>
+<span class="sd">        W: Ground-truth :math:`(d \times d)` DAG adjacency matrix</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Var-sortability value (:math:`in [0, 1]`) of the data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">order_alignment</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">tol</span><span class="o">=</span><span class="n">tol</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">r2_sortability</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.</span><span class="p">):</span>
+<div class="viewcode-block" id="r2_sortability"><a class="viewcode-back" href="../../analytics.html#CausalDisco.analytics.r2_sortability">[docs]</a><span class="k">def</span> <span class="nf">r2_sortability</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sortability by :math:`R^2`.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        X: Data :math:`(n \times d)`</span>
+<span class="sd">        W: Ground-truth :math:`(d \times d)` DAG adjacency matrix</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        :math:`R^2`-sortability value (:math:`in [0, 1]`) of the data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">order_alignment</span><span class="p">(</span>
         <span class="n">W</span><span class="p">,</span>
         <span class="n">r2coeff</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">),</span>
-        <span class="n">tol</span><span class="o">=</span><span class="n">tol</span><span class="p">)</span>
+        <span class="n">tol</span><span class="o">=</span><span class="n">tol</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">snr_sortability</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.</span><span class="p">):</span>
+<div class="viewcode-block" id="snr_sortability"><a class="viewcode-back" href="../../analytics.html#CausalDisco.analytics.snr_sortability">[docs]</a><span class="k">def</span> <span class="nf">snr_sortability</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sortability by signal-to-noise (SnR) ratio.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X: Data :math:`(n \times d)`</span>
+<span class="sd">        W: Ground-truth :math:`(d \times d)` DAG adjacency matrix</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        :math: SnR-sortability value (:math:`in [0, 1]`) of the data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">d</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
     <span class="n">LR</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
@@ -169,7 +204,7 @@
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">parents</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">LR</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="n">parents</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="n">k</span><span class="p">])</span>
             <span class="n">scores</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">LR</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="n">parents</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="n">k</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">order_alignment</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">scores</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="n">tol</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">order_alignment</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">scores</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="n">tol</span><span class="p">)</span></div>
 </pre></div>
 
            </div>
