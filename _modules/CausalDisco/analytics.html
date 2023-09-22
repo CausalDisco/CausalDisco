@@ -92,7 +92,7 @@
 <span class="sd">    Computes a measure of the agreement between a causal ordering following the topology of the (weighted) adjacency matrix W and an ordering by the scores.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        W: Weighted/Binary DAG adjacency matrix (:math:`(d \times d)` np.array).</span>
+<span class="sd">        W: Weighted/Binary DAG adjacency matrix (:math:`d \times d` np.array).</span>
 <span class="sd">        scores: Vector of scores (np.array with :math:`d` entries).</span>
 <span class="sd">        tol (optional): Tolerance threshold for score comparisons (non-negative float).</span>
 
@@ -133,7 +133,7 @@
 <span class="sd">    Compute the :math:`R^2` of each variable using partial correlations obtained through matrix inversion.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        X: Data (:math:`(d \times n)` np.array - note that the dimensions here are different from other methods, following np.corrcoef).</span>
+<span class="sd">        X: Data (:math:`d \times n` np.array - note that the dimensions here are different from other methods, following np.corrcoef).</span>
 
 <span class="sd">    Returns: </span>
 <span class="sd">        Array of :math:`R^2` values for all variables.</span>
@@ -158,8 +158,8 @@
 <span class="sd">    Sortability by variance.</span>
 <span class="sd">    </span>
 <span class="sd">    Args:</span>
-<span class="sd">        X: Data (:math:`(n \times d)` np.array).</span>
-<span class="sd">        W: Weighted/Binary ground-truth DAG adjacency matrix (:math:`(d \times d)` np.array).</span>
+<span class="sd">        X: Data (:math:`n \times d` np.array).</span>
+<span class="sd">        W: Weighted/Binary ground-truth DAG adjacency matrix (:math:`d \times d` np.array).</span>
 <span class="sd">    </span>
 <span class="sd">    Returns:</span>
 <span class="sd">        Var-sortability value (:math:`\in [0, 1]`) of the data</span>
@@ -172,8 +172,8 @@
 <span class="sd">    Sortability by :math:`R^2`.</span>
 <span class="sd">    </span>
 <span class="sd">    Args:</span>
-<span class="sd">        X: Data (:math:`(n \times d)` np.array).</span>
-<span class="sd">        W: Weighted/Binary ground-truth DAG adjacency matrix (:math:`(d \times d)` np.array).</span>
+<span class="sd">        X: Data (:math:`n \times d` np.array).</span>
+<span class="sd">        W: Weighted/Binary ground-truth DAG adjacency matrix (:math:`d \times d` np.array).</span>
 <span class="sd">    </span>
 <span class="sd">    Returns:</span>
 <span class="sd">        :math:`R^2`-sortability value (:math:`\in [0, 1]`) of the data</span>
@@ -189,8 +189,8 @@
 <span class="sd">    Sortability by signal-to-noise (SnR) ratio (also referred to as cause-explained variance CEV).</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        X: Data (:math:`(n \times d)` np.array).</span>
-<span class="sd">        W: Weighted/Binary ground-truth DAG adjacency matrix (:math:`(d \times d)` np.array).</span>
+<span class="sd">        X: Data (:math:`n \times d` np.array).</span>
+<span class="sd">        W: Weighted/Binary ground-truth DAG adjacency matrix (:math:`d \times d` np.array).</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        :math: SnR-sortability value (:math:`\in [0, 1]`) of the data</span>
