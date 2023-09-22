@@ -9,7 +9,7 @@ def sort_regress(X, scores):
     the ordering implied by the scores.
 
     Args:
-        X: Data (:math:`(n \times d)` np.array).
+        X: Data (:math:`n \times d` np.array).
         scores: Vector of scores (np.array with :math:`d` entries).
 
     Returns:
@@ -37,7 +37,7 @@ def random_sort_regress(X, seed=None):
     Perform sort_regress using a random order.
 
     Args:
-        X: Data (:math:`(n \times d)` np.array).
+        X: Data (:math:`n \times d` np.array).
         seed (optional): random seed (integer)
     
     Returns:
@@ -54,7 +54,7 @@ def var_sort_regress(X):
     Perform sort_regress using variances as ordering criterion.
 
     Args:
-        X: Data (:math:`(n \times d)` np.array).
+        X: Data (:math:`n \times d` np.array).
     
     Returns:
         Candidate causal structure matrix with coefficients.
@@ -67,7 +67,7 @@ def r2_sort_regress(X):
     Perform sort_regress using :math:`R^2` as ordering criterion.
 
     Args:
-        X: Data (:math:`(n \times d)` np.array).
+        X: Data (:math:`n \times d` np.array).
     
     Returns:
         Candidate causal structure matrix with coefficients.

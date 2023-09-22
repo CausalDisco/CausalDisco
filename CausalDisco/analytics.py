@@ -8,7 +8,7 @@ def order_alignment(W, scores, tol=0.):
     Computes a measure of the agreement between a causal ordering following the topology of the (weighted) adjacency matrix W and an ordering by the scores.
 
     Args:
-        W: Weighted/Binary DAG adjacency matrix (:math:`(d \times d)` np.array).
+        W: Weighted/Binary DAG adjacency matrix (:math:`d \times d` np.array).
         scores: Vector of scores (np.array with :math:`d` entries).
         tol (optional): Tolerance threshold for score comparisons (non-negative float).
 
@@ -49,7 +49,7 @@ def r2coeff(X):
     Compute the :math:`R^2` of each variable using partial correlations obtained through matrix inversion.
 
     Args:
-        X: Data (:math:`(d \times n)` np.array - note that the dimensions here are different from other methods, following np.corrcoef).
+        X: Data (:math:`d \times n` np.array - note that the dimensions here are different from other methods, following np.corrcoef).
 
     Returns: 
         Array of :math:`R^2` values for all variables.
@@ -74,8 +74,8 @@ def var_sortability(X, W, tol=0.):
     Sortability by variance.
     
     Args:
-        X: Data (:math:`(n \times d)` np.array).
-        W: Weighted/Binary ground-truth DAG adjacency matrix (:math:`(d \times d)` np.array).
+        X: Data (:math:`n \times d` np.array).
+        W: Weighted/Binary ground-truth DAG adjacency matrix (:math:`d \times d` np.array).
     
     Returns:
         Var-sortability value (:math:`\in [0, 1]`) of the data
@@ -88,8 +88,8 @@ def r2_sortability(X, W, tol=0.):
     Sortability by :math:`R^2`.
     
     Args:
-        X: Data (:math:`(n \times d)` np.array).
-        W: Weighted/Binary ground-truth DAG adjacency matrix (:math:`(d \times d)` np.array).
+        X: Data (:math:`n \times d` np.array).
+        W: Weighted/Binary ground-truth DAG adjacency matrix (:math:`d \times d` np.array).
     
     Returns:
         :math:`R^2`-sortability value (:math:`\in [0, 1]`) of the data
@@ -105,8 +105,8 @@ def snr_sortability(X, W, tol=0.):
     Sortability by signal-to-noise (SnR) ratio (also referred to as cause-explained variance CEV).
 
     Args:
-        X: Data (:math:`(n \times d)` np.array).
-        W: Weighted/Binary ground-truth DAG adjacency matrix (:math:`(d \times d)` np.array).
+        X: Data (:math:`n \times d` np.array).
+        W: Weighted/Binary ground-truth DAG adjacency matrix (:math:`d \times d` np.array).
 
     Returns:
         :math: SnR-sortability value (:math:`\in [0, 1]`) of the data
