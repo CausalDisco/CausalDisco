@@ -55,7 +55,7 @@ def r2coeff(X):
         Array of :math:`R^2` values for all variables.
     """
     try:
-        return 1 - np.diag(1/linalg.inv(np.corrcoef(X)))
+        return 1 - 1/np.diag(linalg.inv(np.corrcoef(X)))
     except linalg.LinAlgError:
         # fallback if correlation matrix is singular
         d = X.shape[0]
