@@ -93,8 +93,8 @@
 <span class="sd">    the ordering implied by the scores.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        X: (n x d) matrix</span>
-<span class="sd">        scores: (d) vector</span>
+<span class="sd">        X: Data (:math:`(n \times d)` np.array).</span>
+<span class="sd">        scores: Vector of scores (np.array with :math:`d` entries).</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Candidate causal structure matrix with coefficients</span>
@@ -121,8 +121,8 @@
 <span class="sd">    Perform sort_regress using a random order.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        X: n x d data,</span>
-<span class="sd">        seed (optional): int</span>
+<span class="sd">        X: Data (:math:`(n \times d)` np.array).</span>
+<span class="sd">        seed (optional): random seed (integer)</span>
 <span class="sd">    </span>
 <span class="sd">    Returns:</span>
 <span class="sd">        Candidate causal structure matrix with coefficients.</span>
@@ -138,7 +138,7 @@
 <span class="sd">    Perform sort_regress using variances as ordering criterion.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        X: :math:`(n \times d)` data</span>
+<span class="sd">        X: Data (:math:`(n \times d)` np.array).</span>
 <span class="sd">    </span>
 <span class="sd">    Returns:</span>
 <span class="sd">        Candidate causal structure matrix with coefficients.</span>
@@ -151,7 +151,7 @@
 <span class="sd">    Perform sort_regress using :math:`R^2` as ordering criterion.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        X: :math:`(n \times d)` data,</span>
+<span class="sd">        X: Data (:math:`(n \times d)` np.array).</span>
 <span class="sd">    </span>
 <span class="sd">    Returns:</span>
 <span class="sd">        Candidate causal structure matrix with coefficients.</span>
