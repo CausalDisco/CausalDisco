@@ -7,7 +7,7 @@ The source code can be found on https://github.com/CausalDisco/CausalDisco/.
 If you publish work using CausalDisco, please consider citing the publications
 
 - `Beware of the Simulated DAG! <https://proceedings.neurips.cc/paper_files/paper/2021/file/e987eff4a7c7b7e580d659feb6f60c1a-Supplemental.pdf>`_ 
-- `Simple Sorting Criteria Help Find the Causal Order in Additive Noise Models <https://arxiv.org/abs/2303.18211>`_.
+- `A Scale-Invariant Sorting Criterion to Find a Causal Order in Additive Noise Models <https://arxiv.org/abs/2303.18211>`_.
 
 .. code-block::
 
