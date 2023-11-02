@@ -24,14 +24,6 @@ If you find our algorithms useful please consider citing
 - [Beware of the Simulated DAG!](https://proceedings.neurips.cc/paper_files/paper/2021/file/e987eff4a7c7b7e580d659feb6f60c1a-Supplemental.pdf)
 - [A Scale-Invariant Sorting Criterion to Find a Causal Order in Additive Noise Models](https://arxiv.org/abs/2303.18211).
 ```
-@inproceedings{reisach2021beware,
-    title = {{Beware of the Simulated DAG! Causal Discovery Benchmarks May Be Easy to Game}},
-    author = {Alexander G. Reisach and Christof Seiler and Sebastian Weichwald},
-    booktitle = {{Advances in Neural Information Processing Systems 34 (NeurIPS)}},
-    year = {2021},
-    doi = {10.48550/arXiv.2102.13647},
-}
-
 @inproceedings{reisach2023scale,
     title = {{A Scale-Invariant Sorting Criterion to Find a Causal Order in Additive Noise Models}},
     author = {Alexander G. Reisach and Myriam Tami and Christof Seiler and Antoine Chambaz and Sebastian Weichwald},
@@ -40,6 +32,13 @@ If you find our algorithms useful please consider citing
     doi = {10.48550/arXiv.2303.18211},
 }
 
+@inproceedings{reisach2021beware,
+    title = {{Beware of the Simulated DAG! Causal Discovery Benchmarks May Be Easy to Game}},
+    author = {Alexander G. Reisach and Christof Seiler and Sebastian Weichwald},
+    booktitle = {{Advances in Neural Information Processing Systems 34 (NeurIPS)}},
+    year = {2021},
+    doi = {10.48550/arXiv.2102.13647},
+}
 ```
 
 ### A Simple Example
