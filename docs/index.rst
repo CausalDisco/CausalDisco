@@ -11,19 +11,20 @@ If you publish work using CausalDisco, please consider citing the publications
 
 .. code-block::
 
-    @article{reisach2021beware,
-    title={Beware of the Simulated DAG! Causal Discovery Benchmarks May Be Easy to Game},
-    author={Reisach, Alexander G. and Seiler, Christof and Weichwald, Sebastian},
-    journal={Advances in Neural Information Processing Systems},
-    volume={34},
-    year={2021}
+    @inproceedings{reisach2021beware,
+        title = {{Beware of the Simulated DAG! Causal Discovery Benchmarks May Be Easy to Game}},
+        author = {Alexander G. Reisach and Christof Seiler and Sebastian Weichwald},
+        booktitle = {{Advances in Neural Information Processing Systems 34 (NeurIPS)}},
+        year = {2021},
+        doi = {10.48550/arXiv.2102.13647},
     }
 
-    @article{reisach2023simple,
-    title={Simple Sorting Criteria Help Find the Causal Order in Additive Noise Models},
-    author={Reisach, Alexander G. and Tami, Myriam and Seiler, Christof and Chambaz, Antoine and Weichwald, Sebastian},
-    journal={arXiv preprint arXiv:2303.18211},
-    year={2023}
+    @inproceedings{reisach2023scale,
+        title = {{A Scale-Invariant Sorting Criterion to Find a Causal Order in Additive Noise Models}},
+        author = {Alexander G. Reisach and Myriam Tami and Christof Seiler and Antoine Chambaz and Sebastian Weichwald},
+        booktitle = {{Advances in Neural Information Processing Systems 36 (NeurIPS)}},
+        year = {2023},
+        doi = {10.48550/arXiv.2303.18211},
     }
 
 
