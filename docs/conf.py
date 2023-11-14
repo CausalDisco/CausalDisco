@@ -27,7 +27,7 @@ master_doc = 'index'
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.
-html_logo = 'logo.png'
-html_favicon = 'logo.png'
+html_logo = 'logo.svg'
+html_favicon = 'logo.svg'
 html_theme = 'sphinx_rtd_theme'
 html_show_sphinx = False
