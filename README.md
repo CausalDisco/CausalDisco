@@ -89,3 +89,5 @@ print(
     f'Recovered standardized:\n{1.0*(r2_sort_regress(X_std)!=0)}\n'
 )
 ```
+---
+Shout out to [Anne Helby Petersen](https://github.com/annennenne) for coming up with the "causal disco" naming idea first (check out her [causalDisco](https://cran.r-project.org/web/packages/causalDisco/index.html) package providing tools for causal discovery on observational data in R).
