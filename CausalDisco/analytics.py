@@ -1,5 +1,6 @@
 import numpy as np
 from scipy import linalg
+from scipy.stats import t
 from sklearn.linear_model import LinearRegression
 
 
