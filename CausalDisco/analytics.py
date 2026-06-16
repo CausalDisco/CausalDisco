@@ -3,6 +3,9 @@ from scipy import linalg
 from sklearn.linear_model import LinearRegression
 
 
+### -------------------order alignment measures---------------------------------
+
+
 def order_alignment_paths(W, scores, tol=0.):
     r"""
     Computes a measure of the agreement between a causal ordering following the topology of the (weighted) adjacency matrix W and an ordering by the scores.
@@ -65,6 +68,8 @@ def order_alignment_adjacent_pairs(B, scores, tol=0.):
     return (correct_score_pairs + 0.5 * equal_score_pairs) / n_edges
 
 
+### --------------helper functions for sortabilities----------------------------
+
 
 def r2coeff(X):
     r"""
@@ -89,6 +94,50 @@ def r2coeff(X):
             LR.fit(X[:, parents], X[:, k])
             r2s[k] = LR.score(X[:, parents], X[:, k])
         return r2s
+
+
+def get_relatives(B):
+    """ get the relatives of each node in B. """
+    n = len(B)
+    # build boolean reachability matrix via sum of matrix powers
+    pathmatrix = np.zeros_like(B)
+    P = np.eye(n, dtype=B.dtype)
+    for _ in range(n):
+        pathmatrix += P
+        P = P @ B
+    A = (pathmatrix != 0)
+    # relatives of i = ancestors of i union descendants of all ancestors of i
+    relatives_list = []
+    for i in range(n):
+        anc = A[:, i]
+        # take union of anc and all nodes that are descendants of any anc
+        relatives_list.append(anc | A[anc].any(axis=0))
+    return relatives_list
+
+
+def count_relatives(B):
+    """
+    Count the relatives of each node in a DAG.
+    Idea: for every node, get set of ancestors and set of descendants; then take appropriate unions to get the relatives.
+    Args:
+        B (n,n) np.array: binary DAG adjacency matrix
+    """
+    relatives_list = get_relatives(B)
+    n_relatives = np.array([relatives.sum() for relatives in relatives_list])
+    return n_relatives
+
+
+def rel_count_emp_hard(X, alpha=0.05):
+    corr = np.corrcoef(X.T)
+    n = len(X)
+    df = n - 2
+    tcrit = t.ppf(1 - alpha/2, df)
+    cutoff = tcrit / np.sqrt(tcrit**2 + df)
+    n_relatives = np.sum(np.abs(corr)>cutoff, axis=1)
+    return n_relatives
+
+
+### -------------------------sortability functions------------------------------
 
 
 def var_sortability(X, W, tol=0., measure="paths"):
@@ -154,6 +203,52 @@ def snr_sortability(X, W, tol=0., measure="paths"):
         if np.sum(parents) > 0:
             LR.fit(X[:, parents], X[:, k])
             scores[0, k] = LR.score(X[:, parents], X[:, k])
+    match measure:
+        case "paths":
+            return order_alignment_paths(W, scores, tol=tol)
+        case "adjacent_pairs":
+            return order_alignment_adjacent_pairs(W, scores, tol=tol)
+
+
+def relatives_sortability_empirical(X, W, tol=0., measure="paths", alpha=0.05):
+    r"""
+    Sortability by the empirical number of relatives (hard thresholding via correlation test).
+
+    Args:
+        X: Data (:math:`n \times d` np.array).
+        W: Weighted/Binary ground-truth DAG adjacency matrix (:math:`d \times d` np.array).
+        tol (optional): Tolerance threshold for score comparisons (non-negative float).
+        measure (optional): Order-alignment measure to use. One of ``"paths"`` (default) or ``"adjacent_pairs"``.
+        alpha (optional): Significance level for the correlation test (default 0.05).
+
+    Returns:
+        N-relatives-emp-hard-sortability value (:math:`\in [0, 1]`) of the data
+    """
+    scores = rel_count_emp_hard(X, alpha=alpha)
+    match measure:
+        case "paths":
+            return order_alignment_paths(W, scores, tol=tol)
+        case "adjacent_pairs":
+            return order_alignment_adjacent_pairs(W, scores, tol=tol)
+
+
+### -------------------sortability by idealized criterion-----------------------
+
+
+def true_relatives_sortability(W, tol=0., measure="paths"):
+    r"""
+    Sortability by the true number of relatives as per W.
+
+    Args:
+        X: Data (:math:`n \times d` np.array).
+        W: Weighted/Binary ground-truth DAG adjacency matrix (:math:`d \times d` np.array).
+        tol (optional): Tolerance threshold for score comparisons (non-negative float).
+        measure (optional): Order-alignment measure to use. One of ``"paths"`` (default) or ``"adjacent_pairs"``.
+
+    Returns:
+        N-relatives-sortability value (:math:`\in [0, 1]`) of the data
+    """
+    scores = count_relatives(W)
     match measure:
         case "paths":
             return order_alignment_paths(W, scores, tol=tol)
