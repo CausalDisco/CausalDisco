@@ -211,7 +211,7 @@ def snr_sortability(X, W, tol=0., measure="paths"):
             return order_alignment_adjacent_pairs(W, scores, tol=tol)
 
 
-def relatives_sortability_empirical(X, W, tol=0., measure="paths", alpha=0.05):
+def relatives_sortability(X, W, tol=0., measure="paths", alpha=0.05):
     r"""
     Sortability by the empirical number of relatives (hard thresholding via correlation test).
 

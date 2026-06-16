@@ -66,7 +66,9 @@ def test_analytics():
     from CausalDisco.analytics import (
         var_sortability,
         r2_sortability,
-        snr_sortability
+        snr_sortability,
+        true_relatives_sortability,
+        relatives_sortability,
     )
 
     # generate data
@@ -81,3 +83,21 @@ def test_analytics():
         f'R^2-sortability={r2_sortability(X, W):.2f}\n'
         f'SNR-sortability={snr_sortability(X, W):.2f}'
     )
+
+    # v-structure 0->2, 1->2: count_relatives = [2, 2, 3]
+    # both edges point toward the node with the highest count -> result = 1.0
+    B = np.array([[0, 0, 1],
+                  [0, 0, 1],
+                  [0, 0, 0]], dtype=float)
+    for measure in ('paths', 'adjacent_pairs'):
+        assert true_relatives_sortability(B, measure=measure) == 1.0, \
+            f'v-structure should give 1.0 for measure={measure}'
+
+    # sanity: both functions return values in [0, 1] on chain data
+    for measure in ('paths', 'adjacent_pairs'):
+        result = true_relatives_sortability(W, measure=measure)
+        assert 0. <= result <= 1., \
+            f'true_relatives_sortability out of range for measure={measure}'
+        result = relatives_sortability(X, W, measure=measure)
+        assert 0. <= result <= 1., \
+            f'relatives_sortability out of range for measure={measure}'
