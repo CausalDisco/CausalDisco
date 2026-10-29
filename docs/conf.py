@@ -1,21 +1,21 @@
 # -- Project information -----------------------------------------------------
 import datetime
+from importlib.metadata import version as _version
 
 project = 'CausalDisco'
 author = 'Alexander G. Reisach, Sebastian Weichwald'
 copyright = f'2021-{datetime.date.today().year}, {author}'
-version = '0.2.0'
+# single source of truth for the version is pyproject.toml
+release = _version('CausalDisco')
+version = release
 
 # -- General configuration ---------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings.
 extensions = [
-    "myst_parser",
-    "nbsphinx",
     "sphinx.ext.autodoc",
     "sphinx.ext.autosectionlabel",
     "sphinx.ext.coverage",
-    "sphinx.ext.doctest",
     "sphinx.ext.napoleon",
     "sphinx.ext.viewcode",
     "sphinxcontrib.katex",

@@ -2,14 +2,15 @@ import numpy as np
 from scipy import linalg
 from scipy.stats import t
 from sklearn.linear_model import LinearRegression
+from CausalDisco.graphs import reachability, count_relatives
 
 
 ### -------------------order alignment measures---------------------------------
 
 
-def order_alignment_paths(W, scores, tol=0.):
+def order_alignment_path_lengths(W, scores, tol=0.):
     r"""
-    Computes a measure of the agreement between a causal ordering following the topology of the (weighted) adjacency matrix W and an ordering by the scores.
+    Fraction of ordered pairs :math:`(i, j)` whose scores increase in causal direction (:math:`s_i < s_j`, ties count :math:`1/2`), where each pair is counted once for every length :math:`k` such that a directed path of length :math:`k` from :math:`i` to :math:`j` exists. This is the definition of var- and :math:`R^2`-sortability in Reisach et al. 2021 (Section 3.1) and 2023 (Equation 3).
 
     Args:
         W: Weighted/Binary DAG adjacency matrix (:math:`d \times d` np.array).
@@ -48,14 +49,17 @@ def order_alignment_paths(W, scores, tol=0.):
     return n_correctly_ordered_paths / n_paths
 
 
-def order_alignment_adjacent_pairs(B, scores, tol=0.):
-    """
-    Sortability between adjacent pairs; allows comparing across graph sizes and differentiates between alignment, randomness, and opposite order. In the absence of draws, it can be used to derive a lower bound on the SHD (see Reisach et al. 2026, Section 2.2).
+def order_alignment_edges(B, scores, tol=0.):
+    r"""
+    Fraction of edges :math:`i \to j` whose scores increase in causal direction (:math:`s_i < s_j`, ties count :math:`1/2`). Allows comparing across graph sizes and differentiates between alignment, randomness, and opposite order. With ties broken uniformly at random, :math:`(1 - v)|E|`, where :math:`v` is this measure and :math:`|E|` the number of edges, is the expected number of edges contradicting the order of the scores, and thus a lower bound on the expected Hamming distance between the graph and any graph compatible with that order (Reisach et al. 2026, Section 2.2).
 
     Args:
-        B (dxd np.array): binary adjacency matrix (B[i,j] != 0 means edge i -> j)
-        scores (d np.array): real-valued evaluations of sortability criterion
+        B: Weighted/Binary DAG adjacency matrix (:math:`d \times d` np.array, ``B[i, j] != 0`` means :math:`i \to j`).
+        scores: Vector of scores (np.array with :math:`d` entries).
         tol (optional): Tolerance threshold for score comparisons (non-negative float).
+
+    Returns:
+        Scalar measure of agreement between the orderings (np.nan if B has no edges).
     """
     assert tol >= 0., 'tol must be non-negative'
     n_edges = np.sum(B != 0)
@@ -63,13 +67,38 @@ def order_alignment_adjacent_pairs(B, scores, tol=0.):
         return np.nan
     # score_mat[i,j] = scores[j]-scores[i]: positive iff j scores higher than i
     score_mat = scores.reshape(1, -1) - scores.reshape(-1, 1)
-    edge_scores = (B * score_mat)[B != 0]
+    edge_scores = score_mat[B != 0]
     correct_score_pairs = np.sum(edge_scores > tol)
     equal_score_pairs = np.sum(np.abs(edge_scores) <= tol)
     return (correct_score_pairs + 0.5 * equal_score_pairs) / n_edges
 
 
+def order_alignment_ancestors(B, scores, tol=0.):
+    r"""
+    Fraction of ancestor-descendant pairs :math:`(i, j)`, i.e., pairs connected by at least one directed path from :math:`i` to :math:`j`, whose scores increase in causal direction (:math:`s_i < s_j`, ties count :math:`1/2`). Each pair is counted once, irrespective of the number and lengths of the paths connecting it, so the measure quantifies the agreement of the scores with the partial order implied by the graph. It is a Kendall-type rank agreement restricted to the comparable pairs of this partial order: if the partial order is total (every pair is ancestor-descendant, as approximately in dense graphs), the measure equals :math:`(1 + \tau_a)/2`, where :math:`\tau_a` is Kendall's tau-a between the scores and the causal order.
+
+    Args:
+        B: Weighted/Binary DAG adjacency matrix (:math:`d \times d` np.array, ``B[i, j] != 0`` means :math:`i \to j`).
+        scores: Vector of scores (np.array with :math:`d` entries).
+        tol (optional): Tolerance threshold for score comparisons (non-negative float).
+
+    Returns:
+        Scalar measure of agreement between the orderings (np.nan if B has no edges).
+    """
+    R = reachability(B)
+    np.fill_diagonal(R, False)
+    return order_alignment_edges(R, scores, tol=tol)
+
+
 ### --------------helper functions for sortabilities----------------------------
+
+
+def _corrcoef(X):
+    """ np.corrcoef(X) (rows are variables), raising an error for constant variables, whose correlations are undefined. """
+    constant = np.flatnonzero(np.ptp(X, axis=1) == 0)
+    if len(constant) > 0:
+        raise ValueError(f'constant variables {constant.tolist()} have undefined correlations, please remove them')
+    return np.corrcoef(X)
 
 
 def r2coeff(X):
@@ -83,7 +112,7 @@ def r2coeff(X):
         Array of :math:`R^2` values for all variables.
     """
     try:
-        return 1 - 1/np.diag(linalg.inv(np.corrcoef(X)))
+        return 1 - 1/np.diag(linalg.inv(_corrcoef(X)))
     except linalg.LinAlgError:
         # fallback if correlation matrix is singular
         d = X.shape[0]
@@ -97,39 +126,18 @@ def r2coeff(X):
         return r2s
 
 
-def get_relatives(B):
-    """ get the relatives of each node in B. """
-    n = len(B)
-    # build boolean reachability matrix via sum of matrix powers
-    pathmatrix = np.zeros_like(B)
-    P = np.eye(n, dtype=B.dtype)
-    for _ in range(n):
-        pathmatrix += P
-        P = P @ B
-    A = (pathmatrix != 0)
-    # relatives of i = ancestors of i union descendants of all ancestors of i
-    relatives_list = []
-    for i in range(n):
-        anc = A[:, i]
-        # take union of anc and all nodes that are descendants of any anc
-        relatives_list.append(anc | A[anc].any(axis=0))
-    return relatives_list
-
-
-def count_relatives(B):
-    """
-    Count the relatives of each node in a DAG.
-    Idea: for every node, get set of ancestors and set of descendants; then take appropriate unions to get the relatives.
-    Args:
-        B (n,n) np.array: binary DAG adjacency matrix
-    """
-    relatives_list = get_relatives(B)
-    n_relatives = np.array([relatives.sum() for relatives in relatives_list])
-    return n_relatives
-
-
 def rel_count_emp_hard(X, alpha=0.05):
-    corr = np.corrcoef(X.T)
+    r"""
+    Estimate the number of relatives of each variable as the number of variables (including itself) whose correlation with it is significantly different from zero (two-sided t-test at level alpha).
+
+    Args:
+        X: Data (:math:`n \times d` np.array).
+        alpha (optional): Significance level for the correlation test (default 0.05).
+
+    Returns:
+        Array of estimated relative counts for all variables.
+    """
+    corr = _corrcoef(X.T)
     n = len(X)
     df = n - 2
     tcrit = t.ppf(1 - alpha/2, df)
@@ -141,7 +149,26 @@ def rel_count_emp_hard(X, alpha=0.05):
 ### -------------------------sortability functions------------------------------
 
 
-def var_sortability(X, W, tol=0., measure="paths"):
+def _order_alignment(W, scores, tol, measure):
+    """
+    Agreement between the causal order implied by W and the order of the scores, i.e., the fraction of pairs (i, j) with s_i < s_j (ties count 1/2) among a set of causally ordered pairs determined by the measure:
+
+    - "edges": every edge i -> j, counted once. Measures how well the scores orient the edges, and relates directly to the SHD of a sort-and-regress estimate (Reisach et al. 2026).
+    - "ancestors": every ancestor-descendant pair, counted once. Measures how well the scores recover the causal (partial) order, irrespective of graph density.
+    - "path_lengths": every ancestor-descendant pair, counted once for each distinct length of the directed paths connecting it. The definition of Reisach et al. 2021, 2023, kept to reproduce their results.
+    """
+    match measure:
+        case "edges":
+            return order_alignment_edges(W, scores, tol=tol)
+        case "ancestors":
+            return order_alignment_ancestors(W, scores, tol=tol)
+        case "path_lengths":
+            return order_alignment_path_lengths(W, scores, tol=tol)
+        case _:
+            raise ValueError(f'unknown measure {measure!r}, expected "edges", "ancestors", or "path_lengths"')
+
+
+def var_sortability(X, W, tol=0., measure="edges"):
     r"""
     Sortability by variance.
 
@@ -149,20 +176,16 @@ def var_sortability(X, W, tol=0., measure="paths"):
         X: Data (:math:`n \times d` np.array).
         W: Weighted/Binary ground-truth DAG adjacency matrix (:math:`d \times d` np.array).
         tol (optional): Tolerance threshold for score comparisons (non-negative float).
-        measure (optional): Order-alignment measure to use. One of ``"paths"`` (default) or ``"adjacent_pairs"``.
+        measure (optional): Pairs over which the order alignment is computed. One of ``"edges"`` (default; see ``order_alignment_edges``), ``"ancestors"`` (see ``order_alignment_ancestors``), or ``"path_lengths"`` (the definition of Reisach et al. 2021, 2023; see ``order_alignment_path_lengths``).
 
     Returns:
         Var-sortability value (:math:`\in [0, 1]`) of the data
     """
     scores = np.var(X, axis=0)
-    match measure:
-        case "paths":
-            return order_alignment_paths(W, scores, tol=tol)
-        case "adjacent_pairs":
-            return order_alignment_adjacent_pairs(W, scores, tol=tol)
+    return _order_alignment(W, scores, tol, measure)
 
 
-def r2_sortability(X, W, tol=0., measure="paths"):
+def r2_sortability(X, W, tol=0., measure="edges"):
     r"""
     Sortability by :math:`R^2`.
 
@@ -170,20 +193,16 @@ def r2_sortability(X, W, tol=0., measure="paths"):
         X: Data (:math:`n \times d` np.array).
         W: Weighted/Binary ground-truth DAG adjacency matrix (:math:`d \times d` np.array).
         tol (optional): Tolerance threshold for score comparisons (non-negative float).
-        measure (optional): Order-alignment measure to use. One of ``"paths"`` (default) or ``"adjacent_pairs"``.
+        measure (optional): Pairs over which the order alignment is computed. One of ``"edges"`` (default; see ``order_alignment_edges``), ``"ancestors"`` (see ``order_alignment_ancestors``), or ``"path_lengths"`` (the definition of Reisach et al. 2021, 2023; see ``order_alignment_path_lengths``).
 
     Returns:
         :math:`R^2`-sortability value (:math:`\in [0, 1]`) of the data
     """
     scores = r2coeff(X.T)
-    match measure:
-        case "paths":
-            return order_alignment_paths(W, scores, tol=tol)
-        case "adjacent_pairs":
-            return order_alignment_adjacent_pairs(W, scores, tol=tol)
+    return _order_alignment(W, scores, tol, measure)
 
 
-def snr_sortability(X, W, tol=0., measure="paths"):
+def snr_sortability(X, W, tol=0., measure="edges"):
     r"""
     Sortability by signal-to-noise (SnR) ratio (also referred to as cause-explained variance CEV).
 
@@ -191,10 +210,10 @@ def snr_sortability(X, W, tol=0., measure="paths"):
         X: Data (:math:`n \times d` np.array).
         W: Weighted/Binary ground-truth DAG adjacency matrix (:math:`d \times d` np.array).
         tol (optional): Tolerance threshold for score comparisons (non-negative float).
-        measure (optional): Order-alignment measure to use. One of ``"paths"`` (default) or ``"adjacent_pairs"``.
+        measure (optional): Pairs over which the order alignment is computed. One of ``"edges"`` (default; see ``order_alignment_edges``), ``"ancestors"`` (see ``order_alignment_ancestors``), or ``"path_lengths"`` (the definition of Reisach et al. 2021, 2023; see ``order_alignment_path_lengths``).
 
     Returns:
-        :math: SnR-sortability value (:math:`\in [0, 1]`) of the data
+        SnR-sortability value (:math:`\in [0, 1]`) of the data
     """
     d = X.shape[1]
     scores = np.zeros((1, d))
@@ -204,14 +223,10 @@ def snr_sortability(X, W, tol=0., measure="paths"):
         if np.sum(parents) > 0:
             LR.fit(X[:, parents], X[:, k])
             scores[0, k] = LR.score(X[:, parents], X[:, k])
-    match measure:
-        case "paths":
-            return order_alignment_paths(W, scores, tol=tol)
-        case "adjacent_pairs":
-            return order_alignment_adjacent_pairs(W, scores, tol=tol)
+    return _order_alignment(W, scores, tol, measure)
 
 
-def relatives_sortability(X, W, tol=0., measure="paths", alpha=0.05):
+def rel_sortability(X, W, tol=0., measure="edges", alpha=0.05):
     r"""
     Sortability by the empirical number of relatives (hard thresholding via correlation test).
 
@@ -219,39 +234,30 @@ def relatives_sortability(X, W, tol=0., measure="paths", alpha=0.05):
         X: Data (:math:`n \times d` np.array).
         W: Weighted/Binary ground-truth DAG adjacency matrix (:math:`d \times d` np.array).
         tol (optional): Tolerance threshold for score comparisons (non-negative float).
-        measure (optional): Order-alignment measure to use. One of ``"paths"`` (default) or ``"adjacent_pairs"``.
+        measure (optional): Pairs over which the order alignment is computed. One of ``"edges"`` (default; see ``order_alignment_edges``), ``"ancestors"`` (see ``order_alignment_ancestors``), or ``"path_lengths"`` (the definition of Reisach et al. 2021, 2023; see ``order_alignment_path_lengths``).
         alpha (optional): Significance level for the correlation test (default 0.05).
 
     Returns:
-        N-relatives-emp-hard-sortability value (:math:`\in [0, 1]`) of the data
+        rel-sortability value (:math:`\in [0, 1]`) of the data
     """
     scores = rel_count_emp_hard(X, alpha=alpha)
-    match measure:
-        case "paths":
-            return order_alignment_paths(W, scores, tol=tol)
-        case "adjacent_pairs":
-            return order_alignment_adjacent_pairs(W, scores, tol=tol)
+    return _order_alignment(W, scores, tol, measure)
 
 
 ### -------------------sortability by idealized criterion-----------------------
 
 
-def true_relatives_sortability(W, tol=0., measure="paths"):
+def rel_sortability_oracle(W, tol=0., measure="edges"):
     r"""
     Sortability by the true number of relatives as per W.
 
     Args:
-        X: Data (:math:`n \times d` np.array).
         W: Weighted/Binary ground-truth DAG adjacency matrix (:math:`d \times d` np.array).
         tol (optional): Tolerance threshold for score comparisons (non-negative float).
-        measure (optional): Order-alignment measure to use. One of ``"paths"`` (default) or ``"adjacent_pairs"``.
+        measure (optional): Pairs over which the order alignment is computed. One of ``"edges"`` (default; see ``order_alignment_edges``), ``"ancestors"`` (see ``order_alignment_ancestors``), or ``"path_lengths"`` (the definition of Reisach et al. 2021, 2023; see ``order_alignment_path_lengths``).
 
     Returns:
-        N-relatives-sortability value (:math:`\in [0, 1]`) of the data
+        Oracle rel-sortability value (:math:`\in [0, 1]`) of the graph
     """
     scores = count_relatives(W)
-    match measure:
-        case "paths":
-            return order_alignment_paths(W, scores, tol=tol)
-        case "adjacent_pairs":
-            return order_alignment_adjacent_pairs(W, scores, tol=tol)
+    return _order_alignment(W, scores, tol, measure)
