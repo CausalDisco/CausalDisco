@@ -7,7 +7,7 @@ rng = np.random.default_rng(0)
 
 
 def sample_linear_scm(B, n=10000):
-    # linear SCM with standard normal noise and edge weights in +-[0.5, 2]
+    # linear SCM with standard normal noise and edge weights in +-[0.5, 1]
     d = len(B)
     W = B * rng.choice([-1, 1], size=(d, d)) * rng.uniform(.5, 1., size=(d, d))
     return rng.standard_normal((n, d)).dot(np.linalg.inv(np.eye(d) - W))
