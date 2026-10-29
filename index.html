@@ -1,29 +1,27 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CausalDisco &mdash; CausalDisco  documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" type="text/css" />
-      <link rel="stylesheet" href="_static/katex-math.css" type="text/css" />
-    <link rel="shortcut icon" href="_static/logo.svg"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>CausalDisco &mdash; CausalDisco 0.3.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" />
+      <link rel="stylesheet" type="text/css" href="_static/katex-math.css?v=05624691" />
+
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
-        <script src="_static/katex.min.js"></script>
-        <script src="_static/auto-render.min.js"></script>
-        <script src="_static/katex_autorenderer.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="_static/logo.svg"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e259d695"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/katex.min.js?v=5cc8ed51"></script>
+      <script src="_static/auto-render.min.js?v=af98beb9"></script>
+      <script src="_static/katex_autorenderer.js?v=bebc588a"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -42,9 +40,6 @@
             CausalDisco
               <img src="_static/logo.svg" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                0.2.0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -84,15 +79,24 @@
            <div itemprop="articleBody">
              
   <section id="causaldisco">
-<h1>CausalDisco<a class="headerlink" href="#causaldisco" title="Permalink to this heading"></a></h1>
+<h1>CausalDisco<a class="headerlink" href="#causaldisco" title="Link to this heading"></a></h1>
 <p><a class="reference external" href="https://pypi.org/project/CausalDisco/">CausalDisco</a> is a Python package providing baseline algorithms and analytics tools for Causal Discovery. It is distributed under the open source <a class="reference external" href="https://github.com/CausalDisco/CausalDisco/blob/main/LICENSE">3-clause BSD license</a>.
 The source code can be found on <a class="reference external" href="https://github.com/CausalDisco/CausalDisco/">https://github.com/CausalDisco/CausalDisco/</a>.
 If you publish work using CausalDisco, please consider citing the publications</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://proceedings.neurips.cc/paper_files/paper/2021/file/e987eff4a7c7b7e580d659feb6f60c1a-Supplemental.pdf">Beware of the Simulated DAG!</a></p></li>
-<li><p><a class="reference external" href="https://arxiv.org/abs/2303.18211">A Scale-Invariant Sorting Criterion to Find a Causal Order in Additive Noise Models</a>.</p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/2303.18211">A Scale-Invariant Sorting Criterion to Find a Causal Order in Additive Noise Models</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/2605.06288">A Topological Sorting Criterion for Random Causal Directed Acyclic Graphs</a>.</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>@inproceedings{reisach2023scale,
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>@inproceedings{reisach2026topological,
+    title = {{A Topological Sorting Criterion for Random Causal Directed Acyclic Graphs}},
+    author = {Alexander G. Reisach and Antoine Chambaz and Gilles Blanchard and Sebastian Weichwald},
+    booktitle = {{Advances in Neural Information Processing Systems 39 (NeurIPS)}},
+    year = {2026},
+    doi = {10.48550/arXiv.2605.06288},
+}
+
+@inproceedings{reisach2023scale,
     title = {{A Scale-Invariant Sorting Criterion to Find a Causal Order in Additive Noise Models}},
     author = {Alexander G. Reisach and Myriam Tami and Christof Seiler and Antoine Chambaz and Sebastian Weichwald},
     booktitle = {{Advances in Neural Information Processing Systems 36 (NeurIPS)}},
@@ -110,7 +114,7 @@ If you publish work using CausalDisco, please consider citing the publications</
 </pre></div>
 </div>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>CausalDisco
 </pre></div>
 </div>
@@ -134,7 +138,7 @@ If you publish work using CausalDisco, please consider citing the publications</
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2021-2023, Alexander G. Reisach, Sebastian Weichwald.</p>
+    <p>&#169; Copyright 2021-2026, Alexander G. Reisach, Sebastian Weichwald.</p>
   </div>
 
    

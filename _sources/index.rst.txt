@@ -7,9 +7,18 @@ The source code can be found on https://github.com/CausalDisco/CausalDisco/.
 If you publish work using CausalDisco, please consider citing the publications
 
 - `Beware of the Simulated DAG! <https://proceedings.neurips.cc/paper_files/paper/2021/file/e987eff4a7c7b7e580d659feb6f60c1a-Supplemental.pdf>`_ 
-- `A Scale-Invariant Sorting Criterion to Find a Causal Order in Additive Noise Models <https://arxiv.org/abs/2303.18211>`_.
+- `A Scale-Invariant Sorting Criterion to Find a Causal Order in Additive Noise Models <https://arxiv.org/abs/2303.18211>`_
+- `A Topological Sorting Criterion for Random Causal Directed Acyclic Graphs <https://arxiv.org/abs/2605.06288>`_.
 
 .. code-block::
+
+    @inproceedings{reisach2026topological,
+        title = {{A Topological Sorting Criterion for Random Causal Directed Acyclic Graphs}},
+        author = {Alexander G. Reisach and Antoine Chambaz and Gilles Blanchard and Sebastian Weichwald},
+        booktitle = {{Advances in Neural Information Processing Systems 39 (NeurIPS)}},
+        year = {2026},
+        doi = {10.48550/arXiv.2605.06288},
+    }
 
     @inproceedings{reisach2023scale,
         title = {{A Scale-Invariant Sorting Criterion to Find a Causal Order in Additive Noise Models}},

@@ -7,3 +7,4 @@ API Reference
 
    analytics.rst
    baselines.rst
+   graphs.rst

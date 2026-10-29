@@ -1,0 +1,237 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Graphs &mdash; CausalDisco 0.3.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" />
+      <link rel="stylesheet" type="text/css" href="_static/katex-math.css?v=05624691" />
+
+  
+    <link rel="shortcut icon" href="_static/logo.svg"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e259d695"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/katex.min.js?v=5cc8ed51"></script>
+      <script src="_static/auto-render.min.js?v=af98beb9"></script>
+      <script src="_static/katex_autorenderer.js?v=bebc588a"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Baselines" href="baselines.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            CausalDisco
+              <img src="_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="simple-example.html">Simple Example</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api-reference.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="analytics.html">Analytics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="baselines.html">Baselines</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Graphs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#CausalDisco.graphs.ER_DAG"><code class="docutils literal notranslate"><span class="pre">ER_DAG()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#CausalDisco.graphs.SF_DAG"><code class="docutils literal notranslate"><span class="pre">SF_DAG()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#CausalDisco.graphs.count_relatives"><code class="docutils literal notranslate"><span class="pre">count_relatives()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#CausalDisco.graphs.get_relatives"><code class="docutils literal notranslate"><span class="pre">get_relatives()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#CausalDisco.graphs.is_strongly_connected"><code class="docutils literal notranslate"><span class="pre">is_strongly_connected()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#CausalDisco.graphs.reachability"><code class="docutils literal notranslate"><span class="pre">reachability()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#CausalDisco.graphs.sample_ER_summary_graph"><code class="docutils literal notranslate"><span class="pre">sample_ER_summary_graph()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#CausalDisco.graphs.time_unrolled_DAG"><code class="docutils literal notranslate"><span class="pre">time_unrolled_DAG()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CausalDisco</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="api-reference.html">API Reference</a></li>
+      <li class="breadcrumb-item active">Graphs</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/graphs.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-CausalDisco.graphs">
+<span id="graphs"></span><h1>Graphs<a class="headerlink" href="#module-CausalDisco.graphs" title="Link to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="CausalDisco.graphs.ER_DAG">
+<span class="sig-prename descclassname"><span class="pre">CausalDisco.graphs.</span></span><span class="sig-name descname"><span class="pre">ER_DAG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CausalDisco/graphs.html#ER_DAG"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CausalDisco.graphs.ER_DAG" title="Link to this definition"></a></dt>
+<dd><p>Erdős–Rényi DAG with <span class="math">\(cd\)</span> expected edges: each <span class="math">\(i \to j\)</span>, <span class="math">\(i &lt; j\)</span>, independently with probability <span class="math">\(2c/(d-1)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> – Number of nodes.</p></li>
+<li><p><strong>c</strong> – Expected number of edges per node.</p></li>
+<li><p><strong>shuffle</strong> (<em>optional</em>) – Randomly permute the nodes (otherwise upper triangular).</p></li>
+<li><p><strong>rng</strong> (<em>optional</em>) – Seed or np.random.Generator.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Binary adjacency matrix (<span class="math">\(d \times d\)</span> np.array, <code class="docutils literal notranslate"><span class="pre">B[i,</span> <span class="pre">j]</span> <span class="pre">=</span> <span class="pre">1</span></code> means <span class="math">\(i \to j\)</span>).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CausalDisco.graphs.SF_DAG">
+<span class="sig-prename descclassname"><span class="pre">CausalDisco.graphs.</span></span><span class="sig-name descname"><span class="pre">SF_DAG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CausalDisco/graphs.html#SF_DAG"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CausalDisco.graphs.SF_DAG" title="Link to this definition"></a></dt>
+<dd><p>Scale-free DAG with <span class="math">\(c(d-c)\)</span> edges by Barabási–Albert preferential attachment, as in <code class="docutils literal notranslate"><span class="pre">networkx.barabasi_albert_graph</span></code>. Edges point from newer to older nodes, so hubs have large in-degree.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> – Number of nodes.</p></li>
+<li><p><strong>c</strong> – Number of edges per new node (integer, <span class="math">\(1 \leq c &lt; d\)</span>).</p></li>
+<li><p><strong>shuffle</strong> (<em>optional</em>) – Randomly permute the nodes (otherwise upper triangular).</p></li>
+<li><p><strong>rng</strong> (<em>optional</em>) – Seed or np.random.Generator.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Binary adjacency matrix (<span class="math">\(d \times d\)</span> np.array, <code class="docutils literal notranslate"><span class="pre">B[i,</span> <span class="pre">j]</span> <span class="pre">=</span> <span class="pre">1</span></code> means <span class="math">\(i \to j\)</span>).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CausalDisco.graphs.count_relatives">
+<span class="sig-prename descclassname"><span class="pre">CausalDisco.graphs.</span></span><span class="sig-name descname"><span class="pre">count_relatives</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">W</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CausalDisco/graphs.html#count_relatives"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CausalDisco.graphs.count_relatives" title="Link to this definition"></a></dt>
+<dd><p>Count the relatives of each node in a DAG.
+Idea: for every node, get set of ancestors and set of descendants; then take appropriate unions to get the relatives.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>W</strong> – Weighted/Binary DAG adjacency matrix (<span class="math">\(d \times d\)</span> np.array, <code class="docutils literal notranslate"><span class="pre">W[i,</span> <span class="pre">j]</span> <span class="pre">!=</span> <span class="pre">0</span></code> means <span class="math">\(i \to j\)</span>).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CausalDisco.graphs.get_relatives">
+<span class="sig-prename descclassname"><span class="pre">CausalDisco.graphs.</span></span><span class="sig-name descname"><span class="pre">get_relatives</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">W</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CausalDisco/graphs.html#get_relatives"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CausalDisco.graphs.get_relatives" title="Link to this definition"></a></dt>
+<dd><p>Get the relatives of each node in a DAG, as a list of boolean masks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>W</strong> – Weighted/Binary DAG adjacency matrix (<span class="math">\(d \times d\)</span> np.array, <code class="docutils literal notranslate"><span class="pre">W[i,</span> <span class="pre">j]</span> <span class="pre">!=</span> <span class="pre">0</span></code> means <span class="math">\(i \to j\)</span>).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CausalDisco.graphs.is_strongly_connected">
+<span class="sig-prename descclassname"><span class="pre">CausalDisco.graphs.</span></span><span class="sig-name descname"><span class="pre">is_strongly_connected</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">W</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CausalDisco/graphs.html#is_strongly_connected"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CausalDisco.graphs.is_strongly_connected" title="Link to this definition"></a></dt>
+<dd><p>Whether every node of the directed graph W (possibly cyclic) can reach every other node.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CausalDisco.graphs.reachability">
+<span class="sig-prename descclassname"><span class="pre">CausalDisco.graphs.</span></span><span class="sig-name descname"><span class="pre">reachability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">W</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CausalDisco/graphs.html#reachability"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CausalDisco.graphs.reachability" title="Link to this definition"></a></dt>
+<dd><p>Boolean reachability matrix R of the directed graph W (possibly cyclic), R[i, j] = (i == j or there is a directed path i -&gt; j).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CausalDisco.graphs.sample_ER_summary_graph">
+<span class="sig-prename descclassname"><span class="pre">CausalDisco.graphs.</span></span><span class="sig-name descname"><span class="pre">sample_ER_summary_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_prob</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_tries</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CausalDisco/graphs.html#sample_ER_summary_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CausalDisco.graphs.sample_ER_summary_graph" title="Link to this definition"></a></dt>
+<dd><p>Summary graph for time series: an Erdős–Rényi digraph (each <span class="math">\(i \to j\)</span>, <span class="math">\(i \neq j\)</span>, independently with probability <code class="docutils literal notranslate"><span class="pre">edge_prob</span></code>, so possibly cyclic) plus a self-loop at every node, conditioned on being strongly connected. Due to the conditioning, edges are no longer independent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> – Number of variables.</p></li>
+<li><p><strong>edge_prob</strong> – Probability of each edge.</p></li>
+<li><p><strong>rng</strong> (<em>optional</em>) – Seed or np.random.Generator.</p></li>
+<li><p><strong>max_tries</strong> (<em>optional</em>) – Maximum number of graphs to sample.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Binary adjacency matrix of a directed, possibly cyclic graph (<span class="math">\(p \times p\)</span> np.array, <code class="docutils literal notranslate"><span class="pre">B[i,</span> <span class="pre">j]</span> <span class="pre">=</span> <span class="pre">1</span></code> means <span class="math">\(i \to j\)</span>).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CausalDisco.graphs.time_unrolled_DAG">
+<span class="sig-prename descclassname"><span class="pre">CausalDisco.graphs.</span></span><span class="sig-name descname"><span class="pre">time_unrolled_DAG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A_summary</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CausalDisco/graphs.html#time_unrolled_DAG"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CausalDisco.graphs.time_unrolled_DAG" title="Link to this definition"></a></dt>
+<dd><p>Unroll a summary graph with lag-1 edges over <span class="math">\(T\)</span> time steps: <code class="docutils literal notranslate"><span class="pre">A_summary[i,</span> <span class="pre">j]</span> <span class="pre">!=</span> <span class="pre">0</span></code> means <span class="math">\(i(t) \to j(t+1)\)</span> for <span class="math">\(t = 0, \dots, T-2\)</span>. Node <span class="math">\(i\)</span> at time <span class="math">\(t\)</span> has index <span class="math">\(tp + i\)</span>. The Kronecker product with the <span class="math">\(T \times T\)</span> shift matrix used here is a shorthand for iterating over time steps and placing <code class="docutils literal notranslate"><span class="pre">A_summary</span></code> in each block <span class="math">\((t, t+1)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A_summary</strong> – Weighted/Binary adjacency matrix of a directed graph, possibly cyclic and with self-loops (<span class="math">\(p \times p\)</span> np.array).</p></li>
+<li><p><strong>T</strong> – Number of time steps.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Adjacency matrix of the time-unrolled DAG (<span class="math">\(pT \times pT\)</span> np.array).</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="baselines.html" class="btn btn-neutral float-left" title="Baselines" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2026, Alexander G. Reisach, Sebastian Weichwald.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

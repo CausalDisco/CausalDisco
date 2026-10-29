@@ -1,29 +1,27 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Simple Example &mdash; CausalDisco  documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" type="text/css" />
-      <link rel="stylesheet" href="_static/katex-math.css" type="text/css" />
-    <link rel="shortcut icon" href="_static/logo.svg"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>Simple Example &mdash; CausalDisco 0.3.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" />
+      <link rel="stylesheet" type="text/css" href="_static/katex-math.css?v=05624691" />
+
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
-        <script src="_static/katex.min.js"></script>
-        <script src="_static/auto-render.min.js"></script>
-        <script src="_static/katex_autorenderer.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="_static/logo.svg"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e259d695"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/katex.min.js?v=5cc8ed51"></script>
+      <script src="_static/auto-render.min.js?v=af98beb9"></script>
+      <script src="_static/katex_autorenderer.js?v=bebc588a"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -43,9 +41,6 @@
             CausalDisco
               <img src="_static/logo.svg" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                0.2.0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -85,57 +80,64 @@
            <div itemprop="articleBody">
              
   <section id="simple-example">
-<h1>Simple Example<a class="headerlink" href="#simple-example" title="Permalink to this heading"></a></h1>
+<h1>Simple Example<a class="headerlink" href="#simple-example" title="Link to this heading"></a></h1>
 <p>Install package:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>CausalDisco
 </pre></div>
 </div>
 <p>Run analytics and baselines:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- sample data from a linear SCM:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- sample data from a linear SCM on a random DAG:</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">linalg</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CausalDisco.graphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">ER_DAG</span>
 
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">d</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">d</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">-</span> <span class="n">W</span><span class="p">))</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">ER_DAG</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="n">rng</span><span class="p">)</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">B</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">((</span><span class="mi">10000</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">-</span> <span class="n">W</span><span class="p">))</span>
 <span class="n">X_std</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="c1"># --- run analytics and print results:</span>
 
-<span class="kn">from</span> <span class="nn">CausalDisco.analytics</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">CausalDisco.analytics</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">var_sortability</span><span class="p">,</span>
     <span class="n">r2_sortability</span><span class="p">,</span>
-    <span class="n">snr_sortability</span>
+    <span class="n">rel_sortability</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span>
-    <span class="sa">f</span><span class="s1">&#39;True</span><span class="se">\n</span><span class="si">{</span><span class="n">W</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
-    <span class="sa">f</span><span class="s1">&#39;var-sortability=</span><span class="si">{</span><span class="n">var_sortability</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">W</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
-    <span class="sa">f</span><span class="s1">&#39;R^2-sortability=</span><span class="si">{</span><span class="n">r2_sortability</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">W</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
-    <span class="sa">f</span><span class="s1">&#39;SNR-sortability=</span><span class="si">{</span><span class="n">snr_sortability</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">W</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="sa">f</span><span class="s1">'var-sortability=</span><span class="si">{</span><span class="n">var_sortability</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">W</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="se">\n</span><span class="s1">'</span>
+    <span class="sa">f</span><span class="s1">'R^2-sortability=</span><span class="si">{</span><span class="n">r2_sortability</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">W</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="se">\n</span><span class="s1">'</span>
+    <span class="sa">f</span><span class="s1">'rel-sortability=</span><span class="si">{</span><span class="n">rel_sortability</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">W</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">'</span>
 <span class="p">)</span>
 
-<span class="c1"># --- run baselines and print results:</span>
+<span class="c1"># --- run baselines and print the structural Hamming distance (SHD),</span>
+<span class="c1"># i.e., the number of node pairs whose edge is missing, spurious, or reversed:</span>
 
-<span class="kn">from</span> <span class="nn">CausalDisco.baselines</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gadjid</span><span class="w"> </span><span class="kn">import</span> <span class="n">shd</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">CausalDisco.baselines</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">random_sort_regress</span><span class="p">,</span>
     <span class="n">var_sort_regress</span><span class="p">,</span>
-    <span class="n">r2_sort_regress</span>
+    <span class="n">r2_sort_regress</span><span class="p">,</span>
+    <span class="n">rel_sort_regress</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span>
-    <span class="sa">f</span><span class="s1">&#39;True</span><span class="se">\n</span><span class="si">{</span><span class="n">W</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
-    <span class="s1">&#39;--- randomRegress ---</span><span class="se">\n</span><span class="s1">&#39;</span>
-    <span class="sa">f</span><span class="s1">&#39;Recovered:</span><span class="se">\n</span><span class="si">{</span><span class="mf">1.0</span><span class="o">*</span><span class="p">(</span><span class="n">random_sort_regress</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
-    <span class="sa">f</span><span class="s1">&#39;Recovered standardized:</span><span class="se">\n</span><span class="si">{</span><span class="mf">1.0</span><span class="o">*</span><span class="p">(</span><span class="n">random_sort_regress</span><span class="p">(</span><span class="n">X_std</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
-    <span class="s1">&#39;--- varSortnRegress ---</span><span class="se">\n</span><span class="s1">&#39;</span>
-    <span class="sa">f</span><span class="s1">&#39;Recovered:</span><span class="se">\n</span><span class="si">{</span><span class="mf">1.0</span><span class="o">*</span><span class="p">(</span><span class="n">var_sort_regress</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
-    <span class="sa">f</span><span class="s1">&#39;Recovered standardized:</span><span class="se">\n</span><span class="si">{</span><span class="mf">1.0</span><span class="o">*</span><span class="p">(</span><span class="n">var_sort_regress</span><span class="p">(</span><span class="n">X_std</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
-    <span class="s1">&#39;--- r2SortnRegress ---</span><span class="se">\n</span><span class="s1">&#39;</span>
-    <span class="sa">f</span><span class="s1">&#39;Recovered:</span><span class="se">\n</span><span class="si">{</span><span class="mf">1.0</span><span class="o">*</span><span class="p">(</span><span class="n">r2_sort_regress</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
-    <span class="sa">f</span><span class="s1">&#39;Recovered standardized:</span><span class="se">\n</span><span class="si">{</span><span class="mf">1.0</span><span class="o">*</span><span class="p">(</span><span class="n">r2_sort_regress</span><span class="p">(</span><span class="n">X_std</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span>
-<span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">SHD</span><span class="p">(</span><span class="n">W_hat</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">shd</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">),</span> <span class="p">(</span><span class="n">W_hat</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s1">'randomSortnRegress'</span><span class="p">,</span> <span class="n">random_sort_regress</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">'varSortnRegress'</span><span class="p">,</span> <span class="n">var_sort_regress</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">'r2SortnRegress'</span><span class="p">,</span> <span class="n">r2_sort_regress</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">'relSortnRegress'</span><span class="p">,</span> <span class="n">rel_sort_regress</span><span class="p">),</span>
+<span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s1">'--- </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> ---</span><span class="se">\n</span><span class="s1">'</span>
+        <span class="sa">f</span><span class="s1">'SHD: </span><span class="si">{</span><span class="n">SHD</span><span class="p">(</span><span class="n">method</span><span class="p">(</span><span class="n">X</span><span class="p">))</span><span class="si">}</span><span class="se">\n</span><span class="s1">'</span>
+        <span class="sa">f</span><span class="s1">'SHD standardized: </span><span class="si">{</span><span class="n">SHD</span><span class="p">(</span><span class="n">method</span><span class="p">(</span><span class="n">X_std</span><span class="p">))</span><span class="si">}</span><span class="s1">'</span>
+    <span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -151,7 +153,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2021-2023, Alexander G. Reisach, Sebastian Weichwald.</p>
+    <p>&#169; Copyright 2021-2026, Alexander G. Reisach, Sebastian Weichwald.</p>
   </div>
 
    

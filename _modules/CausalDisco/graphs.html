@@ -1,0 +1,287 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CausalDisco.graphs &mdash; CausalDisco 0.3.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/katex-math.css?v=05624691" />
+
+  
+    <link rel="shortcut icon" href="../../_static/logo.svg"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=e259d695"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/katex.min.js?v=5cc8ed51"></script>
+      <script src="../../_static/auto-render.min.js?v=af98beb9"></script>
+      <script src="../../_static/katex_autorenderer.js?v=bebc588a"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            CausalDisco
+              <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../simple-example.html">Simple Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-reference.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">CausalDisco</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">CausalDisco.graphs</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for CausalDisco.graphs</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+
+<span class="c1">### -------------------------random DAG models----------------------------------</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_permute_nodes</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">rng</span><span class="p">):</span>
+    <span class="n">perm</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">B</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">B</span><span class="p">[</span><span class="n">perm</span><span class="p">][:,</span> <span class="n">perm</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="ER_DAG">
+<a class="viewcode-back" href="../../graphs.html#CausalDisco.graphs.ER_DAG">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">ER_DAG</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">    Erdős–Rényi DAG with :math:`cd` expected edges: each :math:`i \to j`, :math:`i &lt; j`, independently with probability :math:`2c/(d-1)`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        d: Number of nodes.</span>
+<span class="sd">        c: Expected number of edges per node.</span>
+<span class="sd">        shuffle (optional): Randomly permute the nodes (otherwise upper triangular).</span>
+<span class="sd">        rng (optional): Seed or np.random.Generator.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Binary adjacency matrix (:math:`d \times d` np.array, ``B[i, j] = 1`` means :math:`i \to j`).</span>
+<span class="sd">    """</span>
+    <span class="k">assert</span> <span class="n">d</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'d must be at least 2'</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">c</span> <span class="o">/</span> <span class="p">(</span><span class="n">d</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">p</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'edge probability p = 2c/(d-1) = </span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s1"> must be in [0, 1]'</span>
+    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">rng</span><span class="p">)</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">d</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">p</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_permute_nodes</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">rng</span><span class="p">)</span> <span class="k">if</span> <span class="n">shuffle</span> <span class="k">else</span> <span class="n">B</span></div>
+
+
+
+<div class="viewcode-block" id="SF_DAG">
+<a class="viewcode-back" href="../../graphs.html#CausalDisco.graphs.SF_DAG">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">SF_DAG</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">    Scale-free DAG with :math:`c(d-c)` edges by Barabási–Albert preferential attachment, as in ``networkx.barabasi_albert_graph``. Edges point from newer to older nodes, so hubs have large in-degree.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        d: Number of nodes.</span>
+<span class="sd">        c: Number of edges per new node (integer, :math:`1 \leq c &lt; d`).</span>
+<span class="sd">        shuffle (optional): Randomly permute the nodes (otherwise upper triangular).</span>
+<span class="sd">        rng (optional): Seed or np.random.Generator.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Binary adjacency matrix (:math:`d \times d` np.array, ``B[i, j] = 1`` means :math:`i \to j`).</span>
+<span class="sd">    """</span>
+    <span class="k">assert</span> <span class="n">c</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="ow">and</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">c</span> <span class="o">&lt;</span> <span class="n">d</span><span class="p">,</span> <span class="s1">'c must be an integer with 1 &lt;= c &lt; d'</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">rng</span><span class="p">)</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">d</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+    <span class="c1"># initial star: nodes 1, ..., c point to the hub 0</span>
+    <span class="n">B</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">c</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="c1"># every node appears once per incident edge, so that uniform draws</span>
+    <span class="c1"># from this list are proportional to degree</span>
+    <span class="n">repeated</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">c</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">new</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">c</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+        <span class="n">targets</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">targets</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">c</span><span class="p">:</span>
+            <span class="n">targets</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">repeated</span><span class="p">[</span><span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">repeated</span><span class="p">))])</span>
+        <span class="n">targets</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">targets</span><span class="p">)</span>
+        <span class="n">B</span><span class="p">[</span><span class="n">new</span><span class="p">,</span> <span class="n">targets</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">repeated</span> <span class="o">+=</span> <span class="n">targets</span> <span class="o">+</span> <span class="p">[</span><span class="n">new</span><span class="p">]</span> <span class="o">*</span> <span class="n">c</span>
+    <span class="c1"># reverse node labels such that edges point from lower to higher index</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">B</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">_permute_nodes</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">rng</span><span class="p">)</span> <span class="k">if</span> <span class="n">shuffle</span> <span class="k">else</span> <span class="n">B</span></div>
+
+
+
+<div class="viewcode-block" id="sample_ER_summary_graph">
+<a class="viewcode-back" href="../../graphs.html#CausalDisco.graphs.sample_ER_summary_graph">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">sample_ER_summary_graph</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">edge_prob</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_tries</span><span class="o">=</span><span class="mi">10_000</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">    Summary graph for time series: an Erdős–Rényi digraph (each :math:`i \to j`, :math:`i \neq j`, independently with probability ``edge_prob``, so possibly cyclic) plus a self-loop at every node, conditioned on being strongly connected. Due to the conditioning, edges are no longer independent.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        p: Number of variables.</span>
+<span class="sd">        edge_prob: Probability of each edge.</span>
+<span class="sd">        rng (optional): Seed or np.random.Generator.</span>
+<span class="sd">        max_tries (optional): Maximum number of graphs to sample.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Binary adjacency matrix of a directed, possibly cyclic graph (:math:`p \times p` np.array, ``B[i, j] = 1`` means :math:`i \to j`).</span>
+<span class="sd">    """</span>
+    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">rng</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_tries</span><span class="p">):</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">edge_prob</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">is_strongly_connected</span><span class="p">(</span><span class="n">B</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">B</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s1">'no strongly connected summary graph after </span><span class="si">{</span><span class="n">max_tries</span><span class="si">}</span><span class="s1"> tries, try increasing edge_prob'</span>
+    <span class="p">)</span></div>
+
+
+
+<span class="c1">### -------------------------time-unrolled DAGs---------------------------------</span>
+
+
+<div class="viewcode-block" id="time_unrolled_DAG">
+<a class="viewcode-back" href="../../graphs.html#CausalDisco.graphs.time_unrolled_DAG">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">time_unrolled_DAG</span><span class="p">(</span><span class="n">A_summary</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">    Unroll a summary graph with lag-1 edges over :math:`T` time steps: ``A_summary[i, j] != 0`` means :math:`i(t) \to j(t+1)` for :math:`t = 0, \dots, T-2`. Node :math:`i` at time :math:`t` has index :math:`tp + i`. The Kronecker product with the :math:`T \times T` shift matrix used here is a shorthand for iterating over time steps and placing ``A_summary`` in each block :math:`(t, t+1)`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        A_summary: Weighted/Binary adjacency matrix of a directed graph, possibly cyclic and with self-loops (:math:`p \times p` np.array).</span>
+<span class="sd">        T: Number of time steps.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Adjacency matrix of the time-unrolled DAG (:math:`pT \times pT` np.array).</span>
+<span class="sd">    """</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">A_summary</span><span class="p">)</span></div>
+
+
+
+<span class="c1">### -------------------------graph properties-----------------------------------</span>
+
+
+<div class="viewcode-block" id="reachability">
+<a class="viewcode-back" href="../../graphs.html#CausalDisco.graphs.reachability">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">reachability</span><span class="p">(</span><span class="n">W</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">""" Boolean reachability matrix R of the directed graph W (possibly cyclic), R[i, j] = (i == j or there is a directed path i -&gt; j). """</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="p">(</span><span class="n">W</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">W</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="c1"># R^(2^k) covers all paths of length &lt;= 2^k, so stop once squaring changes nothing</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">R_f</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="n">R_next</span> <span class="o">=</span> <span class="p">(</span><span class="n">R_f</span> <span class="o">@</span> <span class="n">R_f</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">R_next</span><span class="p">,</span> <span class="n">R</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">R</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="n">R_next</span></div>
+
+
+
+<div class="viewcode-block" id="is_strongly_connected">
+<a class="viewcode-back" href="../../graphs.html#CausalDisco.graphs.is_strongly_connected">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_strongly_connected</span><span class="p">(</span><span class="n">W</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">""" Whether every node of the directed graph W (possibly cyclic) can reach every other node. """</span>
+    <span class="k">return</span> <span class="n">reachability</span><span class="p">(</span><span class="n">W</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="get_relatives">
+<a class="viewcode-back" href="../../graphs.html#CausalDisco.graphs.get_relatives">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_relatives</span><span class="p">(</span><span class="n">W</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">    Get the relatives of each node in a DAG, as a list of boolean masks.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        W: Weighted/Binary DAG adjacency matrix (:math:`d \times d` np.array, ``W[i, j] != 0`` means :math:`i \to j`).</span>
+<span class="sd">    """</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">reachability</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+    <span class="c1"># relatives of i = ancestors of i union descendants of all ancestors of i</span>
+    <span class="n">relatives_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">anc</span> <span class="o">=</span> <span class="n">R</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span>
+        <span class="c1"># take union of anc and all nodes that are descendants of any anc</span>
+        <span class="n">relatives_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">anc</span> <span class="o">|</span> <span class="n">R</span><span class="p">[</span><span class="n">anc</span><span class="p">]</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">relatives_list</span></div>
+
+
+
+<div class="viewcode-block" id="count_relatives">
+<a class="viewcode-back" href="../../graphs.html#CausalDisco.graphs.count_relatives">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">count_relatives</span><span class="p">(</span><span class="n">W</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">    Count the relatives of each node in a DAG.</span>
+<span class="sd">    Idea: for every node, get set of ancestors and set of descendants; then take appropriate unions to get the relatives.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        W: Weighted/Binary DAG adjacency matrix (:math:`d \times d` np.array, ``W[i, j] != 0`` means :math:`i \to j`).</span>
+<span class="sd">    """</span>
+    <span class="n">relatives_list</span> <span class="o">=</span> <span class="n">get_relatives</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+    <span class="n">n_relatives</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">relatives</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="k">for</span> <span class="n">relatives</span> <span class="ow">in</span> <span class="n">relatives_list</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">n_relatives</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2026, Alexander G. Reisach, Sebastian Weichwald.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

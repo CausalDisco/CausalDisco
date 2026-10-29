@@ -1,29 +1,27 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API Reference &mdash; CausalDisco  documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" type="text/css" />
-      <link rel="stylesheet" href="_static/katex-math.css" type="text/css" />
-    <link rel="shortcut icon" href="_static/logo.svg"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>API Reference &mdash; CausalDisco 0.3.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" />
+      <link rel="stylesheet" type="text/css" href="_static/katex-math.css?v=05624691" />
+
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
-        <script src="_static/katex.min.js"></script>
-        <script src="_static/auto-render.min.js"></script>
-        <script src="_static/katex_autorenderer.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="_static/logo.svg"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e259d695"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/katex.min.js?v=5cc8ed51"></script>
+      <script src="_static/auto-render.min.js?v=af98beb9"></script>
+      <script src="_static/katex_autorenderer.js?v=bebc588a"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -43,9 +41,6 @@
             CausalDisco
               <img src="_static/logo.svg" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                0.2.0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -60,6 +55,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="analytics.html">Analytics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="baselines.html">Baselines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="graphs.html">Graphs</a></li>
 </ul>
 </li>
 </ul>
@@ -89,13 +85,18 @@
            <div itemprop="articleBody">
              
   <section id="api-reference">
-<h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h1>
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="analytics.html">Analytics</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="analytics.html#CausalDisco.analytics.order_alignment"><code class="docutils literal notranslate"><span class="pre">order_alignment()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="analytics.html#CausalDisco.analytics.order_alignment_ancestors"><code class="docutils literal notranslate"><span class="pre">order_alignment_ancestors()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="analytics.html#CausalDisco.analytics.order_alignment_edges"><code class="docutils literal notranslate"><span class="pre">order_alignment_edges()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="analytics.html#CausalDisco.analytics.order_alignment_path_lengths"><code class="docutils literal notranslate"><span class="pre">order_alignment_path_lengths()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="analytics.html#CausalDisco.analytics.r2_sortability"><code class="docutils literal notranslate"><span class="pre">r2_sortability()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="analytics.html#CausalDisco.analytics.r2coeff"><code class="docutils literal notranslate"><span class="pre">r2coeff()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="analytics.html#CausalDisco.analytics.rel_count_emp_hard"><code class="docutils literal notranslate"><span class="pre">rel_count_emp_hard()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="analytics.html#CausalDisco.analytics.rel_sortability"><code class="docutils literal notranslate"><span class="pre">rel_sortability()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="analytics.html#CausalDisco.analytics.rel_sortability_oracle"><code class="docutils literal notranslate"><span class="pre">rel_sortability_oracle()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="analytics.html#CausalDisco.analytics.snr_sortability"><code class="docutils literal notranslate"><span class="pre">snr_sortability()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="analytics.html#CausalDisco.analytics.var_sortability"><code class="docutils literal notranslate"><span class="pre">var_sortability()</span></code></a></li>
 </ul>
@@ -103,8 +104,20 @@
 <li class="toctree-l1"><a class="reference internal" href="baselines.html">Baselines</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="baselines.html#CausalDisco.baselines.r2_sort_regress"><code class="docutils literal notranslate"><span class="pre">r2_sort_regress()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="baselines.html#CausalDisco.baselines.random_sort_regress"><code class="docutils literal notranslate"><span class="pre">random_sort_regress()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="baselines.html#CausalDisco.baselines.rel_sort_regress"><code class="docutils literal notranslate"><span class="pre">rel_sort_regress()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="baselines.html#CausalDisco.baselines.sort_regress"><code class="docutils literal notranslate"><span class="pre">sort_regress()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="baselines.html#CausalDisco.baselines.var_sort_regress"><code class="docutils literal notranslate"><span class="pre">var_sort_regress()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="graphs.html">Graphs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="graphs.html#CausalDisco.graphs.ER_DAG"><code class="docutils literal notranslate"><span class="pre">ER_DAG()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="graphs.html#CausalDisco.graphs.SF_DAG"><code class="docutils literal notranslate"><span class="pre">SF_DAG()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="graphs.html#CausalDisco.graphs.count_relatives"><code class="docutils literal notranslate"><span class="pre">count_relatives()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="graphs.html#CausalDisco.graphs.get_relatives"><code class="docutils literal notranslate"><span class="pre">get_relatives()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="graphs.html#CausalDisco.graphs.is_strongly_connected"><code class="docutils literal notranslate"><span class="pre">is_strongly_connected()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="graphs.html#CausalDisco.graphs.reachability"><code class="docutils literal notranslate"><span class="pre">reachability()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="graphs.html#CausalDisco.graphs.sample_ER_summary_graph"><code class="docutils literal notranslate"><span class="pre">sample_ER_summary_graph()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="graphs.html#CausalDisco.graphs.time_unrolled_DAG"><code class="docutils literal notranslate"><span class="pre">time_unrolled_DAG()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -122,7 +135,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2021-2023, Alexander G. Reisach, Sebastian Weichwald.</p>
+    <p>&#169; Copyright 2021-2026, Alexander G. Reisach, Sebastian Weichwald.</p>
   </div>
 
    

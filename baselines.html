@@ -1,32 +1,31 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Baselines &mdash; CausalDisco  documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" type="text/css" />
-      <link rel="stylesheet" href="_static/katex-math.css" type="text/css" />
-    <link rel="shortcut icon" href="_static/logo.svg"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>Baselines &mdash; CausalDisco 0.3.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" />
+      <link rel="stylesheet" type="text/css" href="_static/katex-math.css?v=05624691" />
+
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
-        <script src="_static/katex.min.js"></script>
-        <script src="_static/auto-render.min.js"></script>
-        <script src="_static/katex_autorenderer.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="_static/logo.svg"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=e259d695"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/katex.min.js?v=5cc8ed51"></script>
+      <script src="_static/auto-render.min.js?v=af98beb9"></script>
+      <script src="_static/katex_autorenderer.js?v=bebc588a"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Graphs" href="graphs.html" />
     <link rel="prev" title="Analytics" href="analytics.html" /> 
 </head>
 
@@ -42,9 +41,6 @@
             CausalDisco
               <img src="_static/logo.svg" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                0.2.0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -61,10 +57,12 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Baselines</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#CausalDisco.baselines.r2_sort_regress"><code class="docutils literal notranslate"><span class="pre">r2_sort_regress()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#CausalDisco.baselines.random_sort_regress"><code class="docutils literal notranslate"><span class="pre">random_sort_regress()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#CausalDisco.baselines.rel_sort_regress"><code class="docutils literal notranslate"><span class="pre">rel_sort_regress()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#CausalDisco.baselines.sort_regress"><code class="docutils literal notranslate"><span class="pre">sort_regress()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#CausalDisco.baselines.var_sort_regress"><code class="docutils literal notranslate"><span class="pre">var_sort_regress()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="graphs.html">Graphs</a></li>
 </ul>
 </li>
 </ul>
@@ -95,10 +93,10 @@
            <div itemprop="articleBody">
              
   <section id="module-CausalDisco.baselines">
-<span id="baselines"></span><h1>Baselines<a class="headerlink" href="#module-CausalDisco.baselines" title="Permalink to this heading"></a></h1>
+<span id="baselines"></span><h1>Baselines<a class="headerlink" href="#module-CausalDisco.baselines" title="Link to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="CausalDisco.baselines.r2_sort_regress">
-<span class="sig-prename descclassname"><span class="pre">CausalDisco.baselines.</span></span><span class="sig-name descname"><span class="pre">r2_sort_regress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CausalDisco/baselines.html#r2_sort_regress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CausalDisco.baselines.r2_sort_regress" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">CausalDisco.baselines.</span></span><span class="sig-name descname"><span class="pre">r2_sort_regress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CausalDisco/baselines.html#r2_sort_regress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CausalDisco.baselines.r2_sort_regress" title="Link to this definition"></a></dt>
 <dd><p>Perform sort_regress using <span class="math">\(R^2\)</span> as ordering criterion.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -112,12 +110,12 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CausalDisco.baselines.random_sort_regress">
-<span class="sig-prename descclassname"><span class="pre">CausalDisco.baselines.</span></span><span class="sig-name descname"><span class="pre">random_sort_regress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CausalDisco/baselines.html#random_sort_regress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CausalDisco.baselines.random_sort_regress" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">CausalDisco.baselines.</span></span><span class="sig-name descname"><span class="pre">random_sort_regress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CausalDisco/baselines.html#random_sort_regress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CausalDisco.baselines.random_sort_regress" title="Link to this definition"></a></dt>
 <dd><p>Perform sort_regress using a random order.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>X</strong> – Data (<span class="math">\(n       imes d\)</span> np.array).</p></li>
+<li><p><strong>X</strong> – Data (<span class="math">\(n \times d\)</span> np.array).</p></li>
 <li><p><strong>seed</strong> (<em>optional</em>) – random seed (integer)</p></li>
 </ul>
 </dd>
@@ -128,15 +126,42 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="CausalDisco.baselines.sort_regress">
-<span class="sig-prename descclassname"><span class="pre">CausalDisco.baselines.</span></span><span class="sig-name descname"><span class="pre">sort_regress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scores</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CausalDisco/baselines.html#sort_regress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CausalDisco.baselines.sort_regress" title="Permalink to this definition"></a></dt>
-<dd><p>Regress each variable onto all predecessors in
-the ordering implied by the scores.</p>
+<dt class="sig sig-object py" id="CausalDisco.baselines.rel_sort_regress">
+<span class="sig-prename descclassname"><span class="pre">CausalDisco.baselines.</span></span><span class="sig-name descname"><span class="pre">rel_sort_regress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CausalDisco/baselines.html#rel_sort_regress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CausalDisco.baselines.rel_sort_regress" title="Link to this definition"></a></dt>
+<dd><p>Perform sort_regress using the empirical number of relatives
+(see <code class="docutils literal notranslate"><span class="pre">rel_count_emp_hard</span></code>) as ordering criterion.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>X</strong> – Data (<span class="math">\(n       imes d\)</span> np.array).</p></li>
+<li><p><strong>X</strong> – Data (<span class="math">\(n \times d\)</span> np.array).</p></li>
+<li><p><strong>alpha</strong> (<em>optional</em>) – Significance level for the correlation test (default 0.05).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Candidate causal structure matrix with coefficients.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CausalDisco.baselines.sort_regress">
+<span class="sig-prename descclassname"><span class="pre">CausalDisco.baselines.</span></span><span class="sig-name descname"><span class="pre">sort_regress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coef_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CausalDisco/baselines.html#sort_regress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CausalDisco.baselines.sort_regress" title="Link to this definition"></a></dt>
+<dd><p>Regress each variable onto all predecessors in
+the ordering implied by the scores.</p>
+<p>For each variable, the set of parents is selected by adaptive Lasso
+(<code class="docutils literal notranslate"><span class="pre">LassoLarsIC</span></code> with BIC, weights from an initial OLS fit) on the
+standardized data, and the returned coefficients are OLS refits of the
+variable onto the selected parents on the centred, original-scale data.</p>
+<p>The selected support is invariant to rescaling the variables (exactly
+with sklearn’s default noise-variance estimate in <code class="docutils literal notranslate"><span class="pre">LassoLarsIC</span></code>, up to
+numerical precision). Standardization is kept for numerical conditioning,
+as sklearn no longer normalizes internally.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> – Data (<span class="math">\(n \times d\)</span> np.array).</p></li>
 <li><p><strong>scores</strong> – Vector of scores (np.array with <span class="math">\(d\)</span> entries).</p></li>
+<li><p><strong>coef_tol</strong> (<em>optional</em>) – Adaptive Lasso coefficients (on the standardized scale) with absolute value at most coef_tol are treated as zero.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -147,7 +172,7 @@ the ordering implied by the scores.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="CausalDisco.baselines.var_sort_regress">
-<span class="sig-prename descclassname"><span class="pre">CausalDisco.baselines.</span></span><span class="sig-name descname"><span class="pre">var_sort_regress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CausalDisco/baselines.html#var_sort_regress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CausalDisco.baselines.var_sort_regress" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">CausalDisco.baselines.</span></span><span class="sig-name descname"><span class="pre">var_sort_regress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CausalDisco/baselines.html#var_sort_regress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CausalDisco.baselines.var_sort_regress" title="Link to this definition"></a></dt>
 <dd><p>Perform sort_regress using variances as ordering criterion.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -166,12 +191,13 @@ the ordering implied by the scores.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="analytics.html" class="btn btn-neutral float-left" title="Analytics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="graphs.html" class="btn btn-neutral float-right" title="Graphs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2021-2023, Alexander G. Reisach, Sebastian Weichwald.</p>
+    <p>&#169; Copyright 2021-2026, Alexander G. Reisach, Sebastian Weichwald.</p>
   </div>
 
    
