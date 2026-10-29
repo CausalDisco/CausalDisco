@@ -8,26 +8,24 @@
 
 CausalDisco provides baseline algorithms and analytics tools for Causal Discovery in Python. The [package](https://pypi.org/project/CausalDisco/) can be installed by running `pip install CausalDisco`. Additional information can be found in the [documentation](https://causaldisco.github.io/CausalDisco/).
 
-### Baseline Algorithms
-Find the following baseline algorithms in __CausalDisco/baselines.py__
-- [R²-SortnRegress](https://causaldisco.github.io/CausalDisco/baselines.html#CausalDisco.baselines.r2_sort_regress)
-- [Var-SortnRegress](https://causaldisco.github.io/CausalDisco/baselines.html#CausalDisco.baselines.var_sort_regress)
-- [rel-SortnRegress](https://causaldisco.github.io/CausalDisco/baselines.html#CausalDisco.baselines.rel_sort_regress)
-- [Random-SortnRegress](https://causaldisco.github.io/CausalDisco/baselines.html#CausalDisco.baselines.random_sort_regress)
+### Functionality
 
-### Analytics Tools
-Find the following analytics tools in __CausalDisco/analytics.py__
-- [R²-sortability](https://causaldisco.github.io/CausalDisco/analytics.html#CausalDisco.analytics.r2_sortability)
-- [Var-sortability](https://causaldisco.github.io/CausalDisco/analytics.html#CausalDisco.analytics.var_sortability)
-- [SNR-sortability](https://causaldisco.github.io/CausalDisco/analytics.html#CausalDisco.analytics.snr_sortability)
-- rel-sortability ([empirical](https://causaldisco.github.io/CausalDisco/analytics.html#CausalDisco.analytics.rel_sortability) and [oracle](https://causaldisco.github.io/CausalDisco/analytics.html#CausalDisco.analytics.rel_sortability_oracle) number of relatives)
-- order alignment over [edges](https://causaldisco.github.io/CausalDisco/analytics.html#CausalDisco.analytics.order_alignment_edges), [ancestor-descendant pairs](https://causaldisco.github.io/CausalDisco/analytics.html#CausalDisco.analytics.order_alignment_ancestors), or [path lengths](https://causaldisco.github.io/CausalDisco/analytics.html#CausalDisco.analytics.order_alignment_path_lengths)
+**Baseline algorithms** can be found in [CausalDisco/baselines.py](https://github.com/CausalDisco/CausalDisco/blob/main/CausalDisco/baselines.py):
+- Var-SortnRegress
+- R²-SortnRegress
+- rel-SortnRegress
 
-### Random Graphs
-Find the following random DAG models in __CausalDisco/graphs.py__
-- [Erdős–Rényi](https://causaldisco.github.io/CausalDisco/graphs.html#CausalDisco.graphs.ER_DAG)
-- [scale-free / Barabási–Albert](https://causaldisco.github.io/CausalDisco/graphs.html#CausalDisco.graphs.SF_DAG)
-- time series: [random Erdős–Rényi summary graphs](https://causaldisco.github.io/CausalDisco/graphs.html#CausalDisco.graphs.sample_ER_summary_graph), [unrolled into DAGs](https://causaldisco.github.io/CausalDisco/graphs.html#CausalDisco.graphs.time_unrolled_DAG)
+**Analytics tools** can be found in [CausalDisco/analytics.py](https://github.com/CausalDisco/CausalDisco/blob/main/CausalDisco/analytics.py):
+- Var-sortability
+- R²-sortability
+- rel-sortability (empirical and oracle number of relatives)
+
+Each sortability can compute order alignment over edges, ancestor-descendant pairs, or path lengths.
+
+**Random DAG models** can be found in [CausalDisco/graphs.py](https://github.com/CausalDisco/CausalDisco/blob/main/CausalDisco/graphs.py):
+- Erdős–Rényi
+- scale-free / Barabási–Albert
+- time series: ER-based summary graphs, unrolled into DAGs
 
 ### Sources
 If you find our algorithms useful please consider citing
