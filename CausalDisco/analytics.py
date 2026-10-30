@@ -75,7 +75,7 @@ def order_alignment_edges(B, scores, tol=0.):
 
 def order_alignment_ancestors(B, scores, tol=0.):
     r"""
-    Fraction of ancestor-descendant pairs :math:`(i, j)`, i.e., pairs connected by at least one directed path from :math:`i` to :math:`j`, whose scores increase in causal direction (:math:`s_i < s_j`, ties count :math:`1/2`). Each pair is counted once, irrespective of the number and lengths of the paths connecting it, so the measure quantifies the agreement of the scores with the partial order implied by the graph. It is a Kendall-type rank agreement restricted to the comparable pairs of this partial order: if the partial order is total (every pair is ancestor-descendant, as approximately in dense graphs), the measure equals :math:`(1 + \tau_a)/2`, where :math:`\tau_a` is Kendall's tau-a between the scores and the causal order.
+    Fraction of ancestor-descendant pairs :math:`(i, j)`, each counted once, whose scores increase in causal direction (:math:`s_i < s_j`, ties count :math:`1/2`). This is the path-existence sortability of Reisach et al. 2023 (Appendix D.1, Equation 5). It measures agreement with the partial order implied by the graph; if that order is total, it equals :math:`(1 + \tau_a)/2`, where :math:`\tau_a` is Kendall's tau-a between the scores and the causal order.
 
     Args:
         B: Weighted/Binary DAG adjacency matrix (:math:`d \times d` np.array, ``B[i, j] != 0`` means :math:`i \to j`).
